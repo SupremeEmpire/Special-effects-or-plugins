@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="author" content="李泽举">
+    <title></title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="jquery-3.1.1.js"></script>
+    <style>
+        .items-list {
+            width: 540px;
+            margin: 0 auto;
+        }
+
+        .items-list span {
+            display: block;
+            float: left;
+            line-height: 59px;
+            text-align: center;
+            width: 59px;
+            height: 59px;
+            position: relative;
+            border: 1px solid #ccc;
+            margin-left: -1px;
+            margin-top: -1px;
+            color: white;
+        }
+        /* 定义平移动画 */
+
+        .list-move {
+            transition: all 1s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="shuffle">打乱</button>
+        <transition-group name="list" tag="div" class="items-list">
+            <!-- 动态绑定颜色，使每一个span的背景颜色改变 -->
+            <span v-for="num in nums" :key="num" :style="{background:color()}">{{num}}</span>
+        </transition-group>
+    </div>
+</body>
+
+</html>
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            message: 'hello vue!',
+            nums: new Array(81).fill(1).map((e, i) => i),
+        },
+        methods: {
+            shuffle() {
+                // JQ实现改变所有的span的颜色
+                // $(".items-list").children().css({
+                //     backgroundColor:this.color
+                // })
+                this.nums.sort(function () {
+                    return Math.random() - 0.5
+                })
+            },
+            color(){
+                return `hsl(${Math.random() * 360},100%,50%)`
+            }
+        },
+        
+        
+    })
+    setInterval(function () {
+        app.shuffle()
+    }, 1100)
+
+</script>
