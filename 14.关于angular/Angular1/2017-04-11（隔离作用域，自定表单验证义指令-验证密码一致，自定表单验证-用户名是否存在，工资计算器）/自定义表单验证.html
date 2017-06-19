@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="JZH">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="angular.js"></script>
+    <title>自定义表单验证</title>
+<style>
+    
+</style>
+</head>
+<body ng-app="app" ng-controller="ctrl">
+  <form name="form">
+    密码: <input type="text" name="password" ng-model="password"> <br><br>
+    确认密码: <input type="text" zy-equal-to="password" name="confirm" ng-model="confirm">
+    <span ng-show="form.confirm.$dirty && form.confirm.$error.zyEqualTo">请确保两次输入的密码一致</span>
+  <p>
+    {{form.confirm.$dirty}} && zyEqualTo: {{form.confirm.$error.zyEqualTo}}
+  </p>
+ </form>
+</body>
+<html>
+<script>
+angular.module('app',[])
+.controller('ctrl',['$scope',function($scope){
+
+}]) 
+.directive('zyEqualTo',function(){
+   return{
+     restrict:'A',
+     
+    //根据指令查找控制器
+    //ng-model 在自身的元素上查找控制器
+    //require:'ng-model',
+    //^^form:input的父标签form  
+     require:['ngModel','^^form'],  
+     link:function($scope,ele,attrs,ctrls){
+       console.log(attrs.zyEqualTo)
+       console.log(ctrls);
+      
+      //获取指令所在标签对应的 controller 
+      var confirmCtrl = ctrls[0];
+      var formCtrl = ctrls[1];
+      var passwordCtrl = formCtrl[attrs.zyEqualTo];
+      console.log(passwordCtrl)
+
+      //$validators:(是一个对象)用来存放验证规则对应的函数
+      //$viewValue:视图上的值
+      //$modelValue:模型中的值
+      //$他们都是controller 的属性
+
+      //我们得验证函数的功能: 密码 == 确认密码 true/false
+      //定义验证规则函数,函数名是用驼峰命名法
+      //参数1:模型中的值;参数2:视图中的值
+      conformCtrl.$validators.zyEqualTo = function(modelValue,viewValue){
+        console.log('密码='+passwordCtrl,$viewValue);
+        console.log('确认密码='+viewValue);
+        console.log(passwordCtrl.$viewValue == viewValue);
+        return passwordCtrl.$viewValue == viewValue;
+      } 
+     }
+   } 
+})       
+</script>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="JZH">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>02-表达式</title>
+    <script src="angular.js"></script>
+</head>
+<!--
+    angular 指令 带有ng前缀
+
+    ng-app 指令初始化一个 angularJS 应用程序
+    通过 angularJS 完成自动初始化应用并且标记 angularJS 脚本的作用域，
+    并通过拥有 ng-app指令的标签作为根节点开始编译其中的DOM
+    如下:ng-app 指令所在的body标签内就是 angularJS的作用域:
+    body标签的正文就是应用的模版;
+    也可以在局部使用 ng-app 指令,比如:<div ng-app>,则angularJS仅在<div>
+    标签内运行 
+
+    另外,ng-app只能启动一个 angular 应用程序,除了第一个ng-app,其他无效
+    ng-init 初始化应用程序的数据,为 angularJS应用程序定义初始值
+
+    表达式写在双花括号内:{{表达式}},这样就可以把数据绑定到html
+    angularJS 表达式 很像JS表达式,可以包含文字、运算符和变量
+-->
+<body ng-app="" ng-init="p={name:'tom',age:22,sex:'男'}">
+     <ul>
+         <li>姓名:{{p.name}}</li>
+         <li>年龄:{{p.age}}</li>
+         <li>性别:{{p.sex}}</li>
+     </ul>   
+</body>
+<html>
+<script>
+        
+</script>

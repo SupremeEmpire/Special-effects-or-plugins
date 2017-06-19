@@ -1,0 +1,86 @@
+angular.module('app',['ui.router','login',
+'type','content','add','detail','modify'])
+// 路由配置
+.config(['$stateProvider','$urlRouterProvider',
+function($stateProvider,$urlRouterProvider){
+    //默认url设置
+    $urlRouterProvider.when('','/login')
+    $stateProvider
+    .state('login',{
+        url:'/login',
+        views:{
+            '':{
+                templateUrl:'tpls/login.html',
+                controller:'loginCtrl'
+            }
+        }
+    })
+    .state('home',{
+        // 变化的url
+        // url是type参数的取值；
+        // type要求是1-4位数字
+        url:'/{type:[0-9]{1,4}}',
+        views:{
+            '':{
+                templateUrl:'tpls/home.html'
+            },
+            'type@home':{
+                templateUrl:'tpls/type.html',
+                controller:'typeCtrl'
+            },
+            'content@home':{
+                templateUrl:'tpls/content.html',
+                controller:'contentCtrl'
+            }
+        }
+    })
+    .state('add',{
+        url:'/add',
+        views:{
+            '':{
+                templateUrl:'tpls/add.html'
+            },
+            'type@add':{
+                templateUrl:'tpls/type.html',
+                controller:'typeCtrl'
+            },
+            'addCon@add':{
+                templateUrl:'tpls/addCon.html',
+                controller:'addConCtrl'
+            }
+        }
+    })
+    .state('detail',{
+        url:'/detail/{id:[0-9]{1,10}}',
+        views:{
+            '':{
+                templateUrl:'tpls/detail.html'
+            },
+            'type@detail':{
+                templateUrl:'tpls/type.html',
+                controller:'typeCtrl'
+            },
+            'detailCon@detail':{
+                templateUrl:'tpls/detailCon.html',
+                controller:'detailConCtrl'
+            }
+        }
+    })
+    .state('modify',{
+        url:'/modify/{id:[0-9]{1,10}}',
+        views:{
+            '':{
+                templateUrl:'tpls/modify.html'
+            },
+            'type@modify':{
+                templateUrl:'tpls/type.html',
+                controller:'typeCtrl'
+            },
+            'modifyCon@modify':{
+                templateUrl:'tpls/modifyCon.html',
+                controller:'modifyConCtrl'
+            }
+        }
+    })
+    
+}])

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Vue具名插槽</title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="author" content="尹学江">
+  <script src="vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 使用组件 -->
+    <my-component>
+    	<p slot="author">发布者：尹学江， 发布时间:2017-06-05</p>
+    	<p>这是第一段的内容</p>
+    	<p>这是第二段的内容</p>
+    	<p slot="contacter">联系人：尹学江</p>
+    </my-component>
+  </div>
+</body>
+<script type="text/html" id="my-component">
+<div>
+	<h1>这是标题</h1>
+	<!-- 没有名字 都插入这个插槽 -->
+	<slot></slot>
+	<!-- 有名字的，插入对应的插槽 -->
+	<slot name="author"></slot>
+	<slot name="contacter"></slot>	
+</div>
+</script>
+<script type="text/javascript">
+// 创建组件
+Vue.component('my-component', {
+  template: '#my-component',
+  data: function() {
+    return {
+      message: "hello world!"
+    }
+  }
+})
+// vue 实例
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!'
+  }
+})
+</script>
+
+</html>

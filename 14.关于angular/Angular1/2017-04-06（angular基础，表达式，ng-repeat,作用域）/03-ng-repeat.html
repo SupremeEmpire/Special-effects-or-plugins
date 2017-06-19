@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="JZH">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>03-ng-repeat</title>
+    <script src="angular.js"></script>
+</head>
+<body ng-app="" ng-init="stus=[
+    {name:'tom',age:22,sex:'男'},
+    {name:'lily',age:23,sex:'女'},
+    {name:'lucy',age:24,sex:'女'}
+  ]">
+<!--
+   ng-repeat 遍历数据集合中的每一个元素,并且加载html模版展示数据
+   当我们需要向html中添加多个类似重复性的DOM元素,可以使用ng-repeat
+
+   $index 获取当前元素的索引值,一般只用在ng-repeat中
+-->
+ <ul>
+     <li ng-repeat="stu in stus">
+         序号:{{$index}},
+         姓名:{{stu.name}},
+         年龄:{{stu.age}},
+         性别:{{stu.sex}} 
+     </li>
+ </ul>
+</body>
+<html>
+<script>
+        
+</script>

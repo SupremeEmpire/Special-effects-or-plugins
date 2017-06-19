@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="author" content="JZH">
+    <title></title>
+    <script src="angular.js"></script>
+</head>
+<body ng-app="app" ng-controller="ctrl">
+    <!--
+        同步验证的之后，随着输入的变化会一直不停的发请求，频率太高
+        异步验证
+        ng-model-options 限定发请求的频率
+        {debounce:1000} 用户停止输入1000毫秒之后，发送异步请求验证
+        {updateOn:'blur'} 当输入框失去焦点时，发送请求
+    -->
+    <form name="form">
+        <input type="text" zy-not-exists ng-model-options="{debounce:1000}" name="username" ng-model="username">
+        <!--$pending 当等待服务端响应时有值，否则 undefined -->
+        <span ng-show="form.username.$dirty && form.username.$pending">正在验证...</span>
+        <span ng-show="form.username.$dirty && form.username.$error.zyNotExists">用户名已经存在</span>
+        <span ng-show="form.username.$dirty && form.username.$valid">√</span>
+    </form>
+
+</body>
+</html>
+<script>
+angular.module('app',[])
+.controller('ctrl',['$scope',function($scope){
+    console.log($scope)
+}])
+// $q  angular内置的服务，它可以异步的执行函数
+// 当函数执行完毕，它允许我们使用函数的返回值
+.directive('zyNotExists',['$http','$q',function($http,$q){
+    return{
+        restrict:'A',
+        require:'ngModel',
+        link:function($scope,ele,attrs,ctrl){
+            console.log(ctrl)
+            // 添加验证规则
+            // $validators 添加同步验证函数
+            // $asyncValidators 添加异步验证函数
+            ctrl.$asyncValidators.zyNotExists = function(modeVlue,viewValue){
+                // $q 类似于 Promise
+                return $q(function(resolve,reject){
+                    // 异步任务
+                    $http.get('/register/'+viewValue)
+                    .then(function(res){
+                        console.log(res)
+                        if(res.data.error == 0){
+                            resolve()
+                        }else{
+                            reject()
+                        }
+                    })
+                    .catch(function(err){
+                        console.log(err)
+                        reject()
+                    })
+                });
+            }
+        }
+    }
+}])
+
+
+</script>

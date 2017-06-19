@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="author" content="李泽举">
+    <title></title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <style>
+        .fade-box {
+            display: inline-block;
+            line-height: 40px;
+            background-color: red;
+            color: white;
+            padding: 0 50px;
+        }
+        /* 注意 : active 对应不带active的上面 */
+
+        .fade-enter-active {
+            /* 进入完成的状态 */
+            transition: all 1s ease;
+            /*opacity: 1;
+        transform: translate(0,0)*/
+        }
+
+        .fade-enter {
+            /* 进入之前的状态 */
+            opacity: 0;
+            transform: translate(100px, 0);
+        }
+
+        .fade-leave-active {
+            /* 离开完成的状态 */
+            transition: all 1s ease;
+            opacity: 0;
+            transform: translate(100px, 0);
+        }
+
+        /*.fade-leave {
+             准备离开的的状态 
+            opacity: 1;
+        transform: translate(0,0)
+        }*/
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <span v-if="seen">{{message}}</span>
+        <button @click="seen=!seen">切换按钮</button>
+        <br>
+        <!-- 1.把要想做动画内容放到transition标签 -->
+        <!-- transition vue就会加上对应样式 -->
+        <!-- 如果不加name vue会加一些 以v-前缀的样式 -->
+        <!-- 如果加name vue会加一些 以fade-前缀的样式 -->
+        <transition name="fade">
+            <div v-if="seen" class="fade-box">
+                我是内容
+            </div>
+        </transition>
+    </div>
+</body>
+
+</html>
+
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            message: "hello vue!",
+            seen: true
+        }
+    })
+
+</script>

@@ -1,0 +1,123 @@
+凡是在angular应用中 模块控制范围的form 都会关联 FormController
+凡是带有ng-model指令的表单元素都会关联一个NgModelController
+FormController和NgModelController共同作用实现了angular表单的输入状态管理和数据验证功能:
+
+注意：作用angular表单验证时，最好是把html原有的验证功能关闭掉
+novalidate 禁用了提交表单时浏览器的默认验证，是HTML5中新增的属性。
+
+1.表单输入状态管理
+--------------------------------------------------------------
+angular提供了关于表单输入的状态管理的样式类
+ng-pristine:表单是干净的，没有修改过
+ng-untouched:未被触摸过
+ng-empty:输入为空值
+ng-valid:验证通过了
+ng-valid- :具体哪一项验证通过
+ng-valid-pattern:正则验证通过
+ng-valid-parse:解析验证通过
+ng-valid-number:数字验证通过
+ng-valid-min:最小值验证通过
+ng-valid-max:最大值验证通过
+ng-dirty:表单是脏的，有修改过
+ng-invalid:验证未通过
+ng-invalid-:具体哪一项验证未通过
+.....
+
+每个input上面会添加class表明当前input的状态
+form上面也会添加class表明当前form的状态
+form状态是内部所有子标签的状态的综合展示
+
+2.表单验证
+--------------------------------------------------------------
+2. ng-pattern指令时 里面的值也是表达式，所以说要正则时也加“"”号
+正则验证不加^$符 ，angular会自动加上
+
+3. 在form上加name="myform" 得到myform对象
+
+4. FormController 常用属性：
+(1). "$pristine": true, 
+pristine(原始的) 整个表单是否是干净的（修改过）
+ture 没有被修改过
+
+(2)."$dirty": false,
+dirty（脏值）
+表单是否被修改过
+false 没有被修改过
+
+(3)."$valid": true,
+valid（有效的）
+表单有效的
+
+(4)."$invalid": true,
+invalid（无效的）
+表单无效的
+
+(5). "$submitted": false
+submitted (提交过的)
+表单是否提交
+
+(6). "$error": {}
+error(错误)
+表单发生错误
+错误对象，包括所有未通过验证规则
+
+5. FormCountroller内置的验证规则名称：
+
+emainl 电子邮件
+max 最大值
+maxlength 最大长度
+min 最小值
+minlength 最小长度
+number 数量
+pattern 模式
+required 必须的
+url url链接
+date 日期
+datetimelocal 本地日期
+time  时间
+week  周
+month  月
+
+6. NgModelController 常用属性
+(1). "$pristine": true, 
+pristine(原始的) 整个表单元素是否是干净的（修改过）
+ture 没有被修改过
+
+(2)."$dirty": false,
+dirty（脏值）
+表单元素是否被修改过
+
+(3)."$valid": true,
+valid（有效的）
+表单元素有效的
+
+(4)."$invalid": true,
+invalid（无效的）
+表单元素无效的
+
+(5). "$error": {}
+error(错误)
+表单元素发生错误
+
+(6). "$untouched": true,
+untouched(没有被触摸过)
+表单是否没有被触摸过
+
+(7)."$touched": false,
+touched(被触摸过)
+表单是否被触摸过
+
+(8). "$name": "email",
+表单元素的名称
+
+(9). "$viewValue": "378915051@qq.com",
+表单元素视图的值
+
+(10). "$modelValue": "378915051@qq.com",
+表单元素模型的值
+
+7. 配合表单使用的指令：
+(1). ng-show
+(2). ng-hide
+(3). ng-disabled 无效（）
+(4). ng-model  最重要的，要生成ngModelController

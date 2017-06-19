@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style lang="">
+        html,body{
+            height: 100%;
+        }
+        body{
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-image: radial-gradient(circle,grey,black);
+
+        }
+        #char{
+            color: greenyellow;
+            font-size: 200px;
+        }
+        .shaking{
+            color: yellow !important;
+        }
+
+    </style>
+    <link rel="stylesheet" href="animate.css">
+</head>
+<body>
+    <div id="char">K</div>
+    <div>请输入显示的字母</div>
+    <div id="result">成功率为0%</div>
+</body>
+</html>
+
+<script>
+    //根据字符代码值获取相应的字符
+    console.log(String.fromCharCode(65));
+    // 根据字符获取其字符代码值
+    console.log("ZB".charCodeAt(0));
+    console.log("aB".charCodeAt(0));
+    console.log("zB".charCodeAt(0));
+</script>
+<script src="index.js"></script>

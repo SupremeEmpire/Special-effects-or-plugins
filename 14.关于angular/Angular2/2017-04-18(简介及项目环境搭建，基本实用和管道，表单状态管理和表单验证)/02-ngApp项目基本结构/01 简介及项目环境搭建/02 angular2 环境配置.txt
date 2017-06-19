@@ -1,0 +1,28 @@
+2016年9月14号Angular发布了Angular2的版本.
+并且angular2提供了angular-cli来帮助我们快速搭建angular2应用环境。
+
+2017年3月23号angular发布了angular4版本。
+angular4向下兼容angular2;没有angular3版本;
+
+
+angular2环境搭建步骤
+
+1、确保您的Node版本 >= 6.9.0  &&  npm 版本更新到最新；
+    npm remove -g angular-cli       #卸载之前的angular-cli
+    npm remove -g @angular/cli      #卸载之前的angular/cli 
+    npm cache clean                 #清理npm 缓存
+
+2、安装最新版的angular/cli(全局安装angular命令行工具)
+    npm install -g @angular/cli@latest
+
+3、安装完成可以使用
+    ng -v   #查看安装的cli的版本
+
+4、创建ng项目（可能比较慢😞，创建好项目后，强烈建议备份一份zip）
+    ng new <myProjectName>
+
+5、cd到项目,启动ng项目(默认在http://localhost:4200下访问)
+    ng serve
+    ng serve --open 参数可以自动打开浏览器并访问
+6、打包项目
+    ng build    #打包后放在 dist/ 文件夹下

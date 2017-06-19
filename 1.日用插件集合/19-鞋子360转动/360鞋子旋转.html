@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="jquery-3.1.1.js"></script>
+
+    <style>
+        section{
+            width: 400px;height: 250px;
+            border: 1px solid black;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <img src="img/image/1.jpg" alt="">
+        <img src="img/image/2.jpg" alt="">
+        <img src="img/image/3.jpg" alt="">
+        <img src="img/image/4.jpg" alt="">
+        <img src="img/image/5.jpg" alt="">
+        <img src="img/image/6.jpg" alt="">
+        <img src="img/image/7.jpg" alt="">
+        <img src="img/image/8.jpg" alt="">
+        <img src="img/image/9.jpg" alt="">
+        <img src="img/image/10.jpg" alt="">
+        <img src="img/image/11.jpg" alt="">
+        <img src="img/image/12.jpg" alt="">
+        <img src="img/image/13.jpg" alt="">
+        <img src="img/image/14.jpg" alt="">
+        <img src="img/image/15.jpg" alt="">
+        <img src="img/image/16.jpg" alt="">
+        <img src="img/image/17.jpg" alt="">
+        <img src="img/image/18.jpg" alt="">
+    </section>
+    <script>
+        $("section").mousemove(function(event){
+            // console.log(event.offsetX,event.offsetY);
+            // 将整体宽度分为18份
+            var avg = $(this).width()/18;
+            // 根据鼠标的位置,来求得鼠标当前位置所处的份数
+            // 从0开始的索引
+            console.log(event.offsetX)
+            var index = Math.floor(($(this).width()-event.offsetX)/avg);
+            console.log(index)
+            // 使第index张图片显示,而使其他图片隐藏
+            // sibings() 同胞元素
+            $("section img").eq(index).show().siblings().hide();
+        })
+    </script>
+</body>
+</html>

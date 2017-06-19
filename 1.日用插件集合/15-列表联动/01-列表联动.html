@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form action="">
+        <label for="">请选择省份</label>
+        <select name="" id="shengFen"></select>
+        <label for="">请选择地区</label>
+        <select name="" id="city"></select>
+    </form>
+</body>
+</html>
+<script>
+    var obj = [
+        {
+            name:"河南",
+            city:["郑州","平顶山","南阳","漯河","洛阳","新密","开封","登封","焦作","三门峡"]
+        },
+        {
+            name:"山东",
+            city:["烟台","枣庄","蓬莱仙岛","潍坊","日照","青岛",]
+
+        },
+        {
+            name:"浙江",
+            city:["江苏","南京","苏州","杭州","嘉兴","连云港","淮安"]
+        },
+        {
+            name:"湖北",
+            city:["武汉","黄石","襄樊","荆门","宜昌","孝感","咸宁","潜江"]
+        }
+    ]
+
+    var shengFen = document.getElementById("shengFen");
+
+        
+        for(let i =0 ; i<obj.length;i++){
+            let option = document.createElement("option");
+            shengFen.appendChild(option);
+            option.innerHTML = obj[i].name;
+            option.dataset.index= i;
+            option.value = i;
+        }
+    var city =document.getElementById("city");
+
+        for(let i =0;i<obj[0].city.length;i++){
+            let option = document.createElement("option");
+            city.appendChild(option);
+            option.innerHTML = obj[0].city[i];
+            option.dataset.index = i;
+        }
+        shengFen.onchange =function(event){
+            var length = city.children.length;
+            for(let i =0 ; i<length;i++){
+                city.removeChild(city.children[0]);
+            }
+            var index =this.value;
+            var objCity = obj[index].city;
+            for(let i =0;i<objCity.length;i++){
+                let option = document.createElement("option");
+                city.appendChild(option);
+                option.innerHTML = objCity[i];
+            }
+
+        }
+
+    
+</script>

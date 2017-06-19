@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="author" content="李泽举">
+    <title></title>
+    <script src="vue.js"></script>
+    <script src="vue-resource.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <span>{{message}}</span>
+        <ol>
+            <li v-for="student in students">{{student.name}}</li>
+        </ol>
+    </div>
+</body>
+
+</html>
+
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            message: 'Hello vue!!',
+            students: []
+        },
+        // 创建
+        creat() {
+            this.$http.get("/getStudents")
+                .then(function (res) {
+                    console.log(res.body)
+                    this.students = res.body.data;
+                })
+                .catch(function(err){
+                    console.log(err)
+                })
+                // 发送post请求
+                // 发请求的时机
+                // 存在跨域限制
+                this.$http.post("/postDemo")
+                .then(function(res){
+                    alert(res.body.message)
+                })
+                // jsonp支持跨域
+                this.$http.jsonp("http://192.168.40.214:3000/jsonp")
+                .then(function(res){
+                    alert(res.body.message)
+                })
+
+        }
+    })
+
+</script>

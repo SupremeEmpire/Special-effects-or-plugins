@@ -1,0 +1,56 @@
+一、
+watch 属于和  filter，methods，computed，data，el平级
+
+watch:{
+
+}
+
+二、Render 函数
+用js来写模板的
+
+三、自定义指令
+
+以v-开头特殊属性
+
+指令包括三部分
+1.指令 2.参数 3.修饰符
+内置的指令都有哪些
+    v-text
+    v-html
+    v-show
+    v-if
+    v-else
+    v-else-if
+    v-for
+    v-on
+    v-bind
+    v-model
+    v-pre
+    v-cloak 防止{{}}影响页面效果的
+    v-once  
+四 混合(对象合并)
+
+对象混合
+$.extend({})
+
+es6 对象混合
+Object.assign(obj,obj1,obj2...)
+
+vue中混合
+mixin:[]
+
+五 插件
+1.  开发插件
+(1).插件通常会为Vue添加全局功能。插件的范围没有限制——一般有下面几种：
+(2).添加全局方法或者属性，如: vue-element
+(3).添加全局资源：指令/过滤器/过渡等，如 vue-touch
+(4).通过全局 mixin方法添加一些组件选项，如: vuex
+(5).添加 Vue 实例方法，通过把它们添加到 Vue.prototype 上实现。
+一个库，提供自己的 API，同时提供上面提到的一个或多个功能，如 vue-router
+
+2.  使用插件
+通过全局方法 Vue.use() 使用插件:
+// 调用 `MyPlugin.install(Vue)`
+Vue.use(MyPlugin)
+
+

@@ -1,0 +1,15 @@
+ 一 单文件组件是什么?
+ 一个以.vue的文件,  因为也是vue一个组件
+
+ 二 单文件组件分成三部分
+ 1.模板部分
+ <template></template>
+ 2.组件的选项
+ <script></script>
+ data
+ methods
+ computed
+ 3.样式部分
+ scoped 如果有scoped 属性 则这个样式,只对当前组件模块有效
+ 如果不加scoped属性 则这个样式,对页面所有都有效
+ <style scoped><style>

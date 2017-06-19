@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+        // 总工资
+    var zGongzi = 10000;
+    // 基准工资
+    // var jzGongzi = zGongzi;
+    // if(jzGongzi > 7662){
+    //     jzGongzi = 7662;
+    // }
+    var jzGongzi = 0;
+    if (zGongzi > 7662) {
+        jzGongzi = 7662;
+    }
+    else {
+        jzGongzi = zGongzi;
+    }
+    console.log(jzGongzi);
+    // 三险一金
+    var sanXianYiJin = jzGongzi * (0.02 + 0.005 + 0.12 + 0.08);
+    // 应纳税所得额
+    var suoDeE = zGongzi - sanXianYiJin - 3500;
+    console.log(suoDeE);
+    var kouchushu = 0;
+    var shuiLv = 0;
+    if (suoDeE <= 0) {
+        console.log("您不需要为国家做贡献");
+    }
+    else {
+
+        // 0-1500
+        if (suoDeE < 1500 && suoDeE > 0) {
+            shuiLv = 0.03;
+        }
+        //1500 - 4500
+        else if (suoDeE < 4500) {
+            shuiLv = 0.1;
+            kouchushu = 105;
+        }
+        else if (suoDeE < 9000) {
+            shuiLv = 0.2;
+            kouchushu = 555;
+        }
+        else if (suoDeE < 35000) {
+            shuiLv = 0.25;
+            kouchushu = 1005;
+        }
+        else if (suoDeE < 55000) {
+            shuiLv = 0.3;
+            kouchushu = 2755;
+        }
+        else if (suoDeE < 80000) {
+            shuiLv = 0.35;
+            kouchushu = 5505;
+        }
+        else {
+            shuiLv = 0.45;
+            kouchushu = 13505;
+        }
+    }
+    // 个人所得税
+    var geRenShui =suoDeE * shuiLv -kouchushu;
+    console.log("您需要缴纳的个人所得税为"+ geRenShui+"元")
+</script>

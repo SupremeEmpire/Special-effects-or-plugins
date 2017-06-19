@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Vue指令</title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="author" content="尹学江">
+  <script src="../vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <span v-show="seen">{{ message }}</span>
+    <!-- 带有参数的指令 -->
+    <a v-bind:href="url">百度</a>
+    <!-- 带有修饰符的指令 -->
+    <!-- 通过修饰符来阻止 默认事件 -->
+    <!-- v-on 常用的修饰符
+		1. .stop - 调用 event.stopPropagation()。
+		2. .prevent - 调用 event.preventDefault()。
+		3. .once - 只触发一次回调。
+
+		键修饰符，键别名
+		<input @keyup.enter="onEnter">
+		键修饰符，键代码
+		<input @keyup.13="onEnter">
+    -->
+    <a href="https://www.google.com" v-on:click.prevent='go'>google</a>
+		<div v-html="content"></div>
+    <input type="text" v-model="msg" v-on:keyup.enter="onEnter">
+  </div>
+</body>
+<script type="text/javascript">
+var app = new Vue({
+  el: '#app',
+  data: {
+  	seen:false,
+    message: 'Hello Vue!',
+    url:'https://www.baidu.com',
+    content:""
+  },
+  methods:{
+  	// 注意事件
+  	// 如果调用时写了（）一写要把事件传过来 在模板传递事件的方法 
+  	// go($event)
+  	go(){
+  		location.href = this.url;
+  	},
+  	onEnter(){
+  		this.content += '<p>'+this.msg+'</p>';
+  		this.msg = '';
+  	}
+  }
+})
+</script>
+
+</html>

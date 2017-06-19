@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>3333</title>
+
+    <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+    <script src="sweetalert.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="sweetalert.css"> 
+   <style>
+       .demo{
+           text-align: center;
+           color:green;
+           font-size: 18px;
+       }
+       .demo-1{
+           margin-bottom: 10px;
+       }
+   </style>
+</head>
+<body>
+<div class="demo">
+    <div class="demo-1">
+        普通提示框:<button>提交</button>
+    </div>
+    <div class="demo-2">
+        美化提示框:<button>点击</button>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    $(function(){
+        $(".demo-1 button").click(function(){
+            alert("这是一个信息提示框!");
+        })
+        $(".demo-2 button").click(function(){
+		 swal({
+			title: "您确定要删除吗？", 
+			text: "您确定要删除这条数据？", 
+			type: "warning",
+			showCancelButton: true,
+			closeOnConfirm: false,
+			confirmButtonText: "是的，我要删除",
+			confirmButtonColor: "#ec6c62"
+			}, function() {
+				$.ajax({
+					url: "index.php",
+					type: "DELETE"
+				}).done(function(data) {
+					swal("操作成功!", "已成功删除数据！", "success");
+				}).error(function(data) {
+					swal("OMG", "删除操作失败了!", "error");
+				});
+			});
+	});
+    })
+</script>

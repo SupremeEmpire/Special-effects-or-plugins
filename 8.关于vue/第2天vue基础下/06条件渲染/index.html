@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Vue</title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="author" content="尹学江">
+  <script src="../vue.js"></script>
+  <style type="text/css">
+    /* .newsList {
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin-top: 10px;
+    min-height: 220px;
+  }
+  
+  .newsList img {
+    float: left;
+    margin-right: 20px;
+  } */
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 第1种 -->
+    <div v-if="ok">我已经ok了</div>
+    <!-- 第2种  注意：v-if和v-else  中间有其它内容-->
+    <div v-if="!ok">我已准备好了</div>
+    <div v-else>我还没有准备好</div>
+    <!-- 第3种 -->
+    <!-- template 作用：不会增加新标签 -->
+    <button @click="isText=!isText">切换新闻浏览方式</button>
+    <div class="newsList">
+      <div v-if="isText">这个只有标题的形势</div>
+      <template v-else>
+        <h2>这是标题</h2>
+        <img src="a1.jpg">
+        <div>这是说明</div>
+      </template>
+    </div>
+    <!-- 第4种 -->
+    <div v-if="week==6">今天星期六可以休息</div>
+    <div v-else-if="week==0">今天星期日可以休息</div>
+    <div v-else>今天是日期{{week}}，需要工作了</div>
+
+    <!-- 特殊情况 两种登录方式 -->
+    <!-- vue对if切换做了优化处理，如果两个标签相同，则不重新渲染dom -->
+    <!-- 不同话就会切换 -->
+    <!-- 如果我们想让相同的标签 在切换时重新渲染dom 可以使用key属性 -->
+    <button @click="isName=!isName">切换登录方式</button>
+    <template v-if="isName">
+      <label>用户名登录：</label>
+      <input type="text" name="name" key="userName">
+    </template>
+    <template v-else>
+      <label>邮箱登录：</label>
+      <input type="text" name="name" key="eamilName">
+    </template>
+
+    <div v-show="ok">我可以被看到</div>
+  </div>
+</body>
+<script type="text/javascript">
+  var app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello Vue!',
+      ok: true,
+      isText: false,
+      week: new Date().getDay(),
+      isName: true
+    }
+  })
+
+</script>
+
+</html>

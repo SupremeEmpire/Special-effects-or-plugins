@@ -1,0 +1,92 @@
+<!--app.component.html 组件的模板-->
+
+<div>
+  <h2>一、ng2 数据绑定</h2>
+
+  <h3>1、双花括号绑定数据</h3>
+  <p>
+    {{title}}; <br> a+b = {{a+b}}
+   </p>
+
+   <h3>2、属性的绑定</h3>
+   <p [title]="title">属性的绑定使用[]</p>
+
+   <h3>3、事件绑定</h3>
+   <p (click)="changeTitle($event)">事件绑定使用(),$event表示原生事件对象</p>
+   
+   <h3>4、双向数据绑定</h3>
+   <p>双向数据绑定使用[(ngModel)],使用 ngModel 之前需要在当前模块类
+     导入Formsmodule模块</p>
+   <input type="text" [(ngModel)]="title">
+
+   <h3>5、attribute绑定</h3>
+   <button [attr.title]="title">{{title}}</button>
+
+   <h3>6、class(类名)的绑定</h3>
+   <p [class]="'xxx vvv'">1、class绑定可以使用字符串,多个类名使用空格隔开</p>
+   <p [class]="title">2、class可以绑定一个变量,把变量的值作为类名使用</p>
+   <p [class.active]="show" (click)="show = !show">
+     3、class绑定可以使用class.className 的方式,当show为true时添加类名
+     active,否则不添加
+   </p>
+
+   <h3>7、style的绑定</h3>
+   <p [style.color]="show ? 'lightskyblue' : 'green'">
+     style.css属性名绑定一个三目运算符,根据三目运算符的结果取值
+   </p>
+   <p [style.font-size.rem]="show ? 1.5 : 1">改变字体大小</p>
+
+   <h3>8、模版引用变量</h3>
+   #变量名 相当于声明了一个变量,在这里 username 就是 input标签
+   <input type="text" [(ngModel)]="title" #username>
+   {{username}}---{{username.value}}
+
+   <h3>9、hidden的使用</h3>
+   <p [hidden]="show">绑定hidden属性,取值为true,隐藏使用display:none
+     反之,显示
+   </p>
+
+   <h2>二、ng2的指令</h2>
+   <h3>1、*ngIf</h3>
+   <p *ngIf="show">
+     *ngIf 根据布尔条件显示或者移除一个元素
+     true 显示,反之,从DOM中移除该元素
+   </p>
+
+   <h3>2、*ngFor</h3>
+   <ul>
+     <!--i 是元素对应的索引值-->
+     <li *ngFor="let stu of stus; let i = index;">
+      {{i}}------{{stu.name}}
+     </li>
+   </ul>
+
+   <h3>3、 ngSwitch</h3>
+    <ul [ngSwitch]="name">
+      <li *ngSwitchCase="'tom'">是tom</li>
+      <li *ngSwitchCase="'lily'">是lily</li>
+      <li *ngSwitchCase="'lucy'">是lucy</li>
+      <li *ngSwitchDefault>不知道是谁</li>
+    </ul>
+
+    <h2>三、ng2 管道pipe</h2>
+    <h3>1、内置的pipe</h3>
+    <p>{{'hello' | uppercase}}</p>
+    <p>{{'Hello' | lowercase}}</p>
+    <!--整数保留最小位数.小数保留最小位数-小数最大保留位数 默认值:1.0-3-->
+    <p>{{'123456' | number:'1.2-3'}}</p>
+    <p>{{0.6722 | percent:'1.2-3'}}</p>
+    <!--人民币 CNY;美元USD-->
+    <p>{{10000 | currency:'CNY':'1.2-3'}}</p>
+    <p>{{stus | json}}</p>
+    <p>{{today | date:'yyyy-MM-dd HH:mm:ss'}}</p>
+
+    <h3>2、自定义管道</h3>
+    <p>{{ngbook | book}}</p>
+    <p>{{ngbook | book:'"'}}</p> 
+    <p>{{ngbook | book:'《':'》'}}</p>
+      <!--使用组件-->
+    <app-home></app-home>
+</div>
+
+

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="author" content="金西振">
+    <title></title>
+    <script src="angular.js"></script>
+</head>
+<!--
+    自动启动 angular 是通过 ng-app 来实现
+    当在html页面中导入 angular.js之后，angularJS 只是创建了一个
+    全局的 angular对象，这个对象有一些方法可以供我们使用，
+    但是应用的框架还没有建立
+-->
+<body ng-controller="ctrl">
+    <h1>手动启动angular</h1> 
+    {{name}} 
+</body>
+</html>
+<script>
+angular.module('app',[])
+.controller('ctrl',['$scope',function($scope){
+    $scope.name = 'hello angular';
+}]);
+
+// 手动启动angular
+// 参数1： angular的生效范围
+// 参数2： 使用的模块名
+angular.bootstrap(document.body,['app']);
+
+</script>

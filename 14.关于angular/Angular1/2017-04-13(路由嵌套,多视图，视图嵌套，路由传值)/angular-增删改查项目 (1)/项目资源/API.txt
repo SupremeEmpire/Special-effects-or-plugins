@@ -1,0 +1,53 @@
+登录
+get.php?action=login&username=admin&password=123456
+
+文章类型
+get.php?action=get_arctype&where=reid=0
+
+
+文章总数量
+所有
+get.php?action=get_total
+某一类型文章的数量
+（1：前端；2：安卓；3：ios）
+get.php?action=get_total&where=typeid=1
+
+文章内容 
+不分类型
+（offset:偏移量；rows:行数 
+分页时需要用到）
+get.php?action=get_list&offset=0&rows=12&orderField=id&orderBy=DESC
+某一类型
+get.php?action=get_list&offset=0&rows=10&where=typeid=1&orderField=id&orderBy=DESC
+
+
+新增文章
+请求方式：post
+url:get.php
+请求体：文章数据对象，包含title、content、typeid、action字段，其中action的取值是add_article，
+举例如下：
+	$http({
+            method:"POST",
+            url:'get.php',
+            data: $.param($scope.formData),
+            headers:{'Content-Type':'application/x-www-form-urlencoded'}
+        })
+
+
+删除文章
+（id：文章的id字段）
+get.php?action=delete_article&id=1
+
+
+获取某一文章数据
+（id：文章的id字段）
+get.php?action=get_article&id=1
+
+更新文章
+请求方式：post
+url:get.php
+请求体：文章数据对象，包含id、title、content、typeid、action字段，其中action的取值是update_article
+
+
+
+

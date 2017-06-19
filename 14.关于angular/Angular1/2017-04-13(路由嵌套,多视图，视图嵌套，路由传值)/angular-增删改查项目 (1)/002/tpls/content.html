@@ -1,0 +1,46 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+        <a ui-sref="add" class="btn btn-primary">新增内容</a>
+  </div>
+  <div class="panel-body">
+    <table class="table">
+        <tr>
+            <th>标题</th>
+            <th>操作</th>
+        </tr>
+        <tr ng-repeat="list in lists" id="{{list.id}}">
+            <td>{{list.title}}</td>
+            <td>
+                <div class="btn-group" role="group">
+                    <a ui-sref="detail({id:{{list.id}}})" class="btn btn-success btn-xs">详情</a>
+                    <a class="btn btn-info btn-xs" ui-sref="modify({id:{{list.id}}})">修改</a>
+                    <a class="btn btn-danger btn-xs" ng-click="delete(list.id);">删除</a>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <nav aria-label="Page navigation">
+        <ul class="pagination page-list">
+            <li ng-class="pageConfig.currentPage==1?'disabled':''">
+                <a ng-click="previous();" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li ng-repeat="page in pageConfig.pages" 
+                ng-class="page==pageConfig.currentPage? 'active' : ''">
+                <a ng-click="pageConfig.currentPage=page;pageConfig.resetPagesAndMaxPage();getDataOfCurrentPage();">{{page}}</a>
+            </li>
+            <li ng-class="pageConfig.currentPage==pageConfig.maxPage?'disabled':''">
+                <a ng-click="next();" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+        <div class="page-total">
+            Go <input type="text" ng-keyup="goToPage($event);">页
+            共<strong>{{pageConfig.total}}</strong>条
+        </div>
+    </nav>
+  </div>
+</div>

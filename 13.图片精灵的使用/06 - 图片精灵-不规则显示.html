@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片精灵-不规则显示</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            background-image: url(icons.jpg);
+            background-size: 700% 700%;
+        }
+        section{
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+            background-image: url(icons.jpg);
+            /*关于background-size: 700% 700%的思路:
+             1 如果将背景图尺寸同意调整为宽高都100%,那么
+               整个背景图都在元素范围内.
+             2 在1的基础上,由于精灵图由7x7的图片构成,所以
+               如果再放大7倍就会直接完全显示第一个小图.
+             3 在2的基础上,调整background-position,移动距离
+               按照此时元素的宽高,即可显示想要的任何小图.
+            */
+            background-size: 700% 700%;
+            background-position: -200px -1000px;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+    <section></section>
+</body>
+</html>

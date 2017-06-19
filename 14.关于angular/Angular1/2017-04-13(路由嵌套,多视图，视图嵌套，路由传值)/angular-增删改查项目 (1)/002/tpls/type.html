@@ -1,0 +1,7 @@
+<div class="list-group">
+  <a class="list-group-item active">类别</a>
+  <a ui-sref="home({type:0})" class="list-group-item">全部</a>
+  <a ui-sref="home({type:{{type.id}}})" class="list-group-item" ng-repeat="type in types">
+      {{type.typename}}
+  </a>
+</div>

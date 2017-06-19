@@ -1,0 +1,61 @@
+模块化
+1. requireJs 能做什么？
+
+(1). 可以异步加载js 
+异步加载好处理：  加载速度
+
+(2). 实现js模块化编程 
+require.js是最早实现js模块编程的
+
+模块化编程的好处：解决全局变量冲突的问题
+shuffle
+jQuery    ____   jQuery 变量
+
+1. 怎么定义模块
+ define([依赖模块],function(对应模块){
+ 使用模块
+
+ })
+2. 怎么导出模块
+(1) return 
+(2) 
+exports.name = name
+exports.fun = fun
+
+3. 怎么使用模块
+require(['module1'],function(module1){
+	module1
+})
+
+
+三、requirejs 对jQuery的支持
+// jQuery文件名必须jquery
+// 并且 jQuery必须和入口文件放到同一目录
+
+
+四、解决jQuery的支持方案
+定义模块
+// 定义模块define(模块名,'依赖模块',回调函数)
+
+define('jquery',["m3"],function(m3){
+	$
+})
+
+
+
+五、定义模块define(模块名,'依赖模块',回调函数)
+
+
+
+六、AMD和commonjs区别
+
+
+七、require.js配置
+
+
+八、require.js插件
+css.js
+可以帮助我们加载css 文件
+
+text.js
+可以帮助我们加载 任意类型的文本文件

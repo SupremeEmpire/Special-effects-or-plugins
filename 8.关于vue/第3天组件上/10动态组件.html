@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Vue</title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="author" content="尹学江">
+  <script src="vue.js"></script>
+  <style type="text/css">
+  body,
+  html {
+    margin: 0;
+  }
+  
+  body {
+    padding-top: 50px;
+  }
+  
+  .bg {
+    background-color: #f3f3f3;
+  }
+  
+  .bg .box {
+    height: 100px;
+    background-color: red;
+    margin-top: 2000px;
+    margin-bottom: 20px;
+  }
+  
+  .fixed {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="fixed">
+      <button @click="com='com1'"> 切换到组件1</button>
+      <button @click="com='com2'"> 切换到组件2</button>
+      <button @click="com='com3'"> 切换到组件3</button>
+    </div>
+    <!-- 动态组件 -->
+    <!-- keep-alive 保持组件的状态，避免重新渲染 -->
+    <keep-alive>
+    <component :is="com"></component>
+    </keep-alive>
+  </div>
+</body>
+<script type="text/javascript">
+// 创建组件
+Vue.component('com1', {
+    template: '<div class="bg">这是组件1 <input type="text" /><div class="box"></div></div>'
+  })
+  // 创建组件
+Vue.component('com2', {
+    template: '<div class="bg">这是组件2 <input type="text" /><div class="box"></div></div>'
+  })
+  // 创建组件
+Vue.component('com3', {
+  template: '<div class="bg">这是组件3 <input type="text" /><div class="box"></div></div>'
+})
+
+// vue 实例
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!',
+    com: "com1"
+  }
+})
+</script>
+
+</html>

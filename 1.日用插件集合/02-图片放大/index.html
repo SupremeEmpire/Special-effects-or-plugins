@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>图片放大</title>
+	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="css/htmleaf-demo.css">
+	<link rel="stylesheet" type="text/css" href="css/zoomio.css">
+	<style type="text/css">
+		.htmleaf-content{
+			width: 700px;
+			margin:50px auto;
+		}
+		/* sample CSS to set the initial dimensions of images that will be zoomable */
+		.sampleimage{
+			width: 300px;
+			height: auto;
+			margin-right: 20px;
+		}
+	</style>
+	<!--[if IE]>
+		<script src="http://libs.useso.com/js/html5shiv/3.7/html5shiv.min.js"></script>
+	<![endif]-->
+</head>
+<body>
+	<div class="htmleaf-container">
+		<header class="htmleaf-header">
+			<h1>图片放大</h1>
+		</header>
+
+
+
+		<div class="htmleaf-content">
+			<img class="sampleimage" src="img/bluewall.jpg" /> 
+			<img class="sampleimage" src="img/carandgirl.jpg" />
+		</div>
+
+		
+	<script src="js/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="js/zoomio.js"></script>
+	<script type="text/javascript">
+
+		$(function(){
+			$(".sampleimage").zoomio();
+		})
+	</script>
+</body>
+</html>

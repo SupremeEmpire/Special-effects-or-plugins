@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Vue</title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="author" content="尹学江">
+  <script src="vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <span>{{ message }}</span>
+  </div>
+</body>
+<script type="text/javascript">
+let data = {message: 'Hello Vue!'}
+var app = new Vue({
+  el: '#app',
+  data: data
+});
+// 后来添加的数据不能被  vue处理
+data.msg = "这是一个消息"
+
+// 当message发生变化时  为什么页面中显示message也发变化
+
+// vue做了什么工作？
+// 1. 把数据都转化成 get set 模式
+console.log(app);
+setTimeout(function() {
+  app.message = "您好世界！"
+  // ·调用   app.$data.set(message)
+  console.log(app.message)
+  // ·调用   app.$data.get(message)
+}, 2000)
+</script>
+
+</html>

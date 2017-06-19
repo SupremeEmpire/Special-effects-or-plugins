@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Vue表单控件</title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="author" content="尹学江">
+  <script src="../vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 一、基础用法 -->
+    <!-- 1. 单行文本 -->
+    <input type="text" name="name" v-model="name">
+    <br> 您输出的用户名为：{{name}}
+    <!-- 2. 多行文本 -->
+    <textarea v-model="multiline" rows="10" cols="50"></textarea>
+    <br>
+    <p>
+      <pre>{{multiline}}</pre>
+    </p>
+    <!-- 3. 复选框 -->
+    <div>
+      同意
+      <input type="checkbox" name="agree" v-model="agree">
+      <br> {{agree}}
+    </div>
+    <!-- 4. 多个勾选框 -->
+    <div>
+      <label>篮球
+        <input type="checkbox" name="" value="篮球" v-model="hobbys">
+      </label>
+      <br>
+      <label>足球
+        <input type="checkbox" name="" value="足球" v-model="hobbys">
+      </label>
+      <br>
+      <label>羽毛球
+        <input type="checkbox" name="" value="羽毛球" v-model="hobbys">
+      </label>
+      <br>
+      <label>乒乓球
+        <input type="checkbox" name="" value="乒乓球" v-model="hobbys">
+      </label>
+      <br>
+      <label>台球
+        <input type="checkbox" name="" value="台球" v-model="hobbys">
+      </label>
+      <br> 您的爱好有以下几项： {{hobbys.join(",")}}
+    </div>
+    <!-- 5. 单选 -->
+    <div>
+      <label>男生
+        <input type="radio" name="isMale" value="男" v-model="sex">
+      </label>
+      <label>女生
+        <input type="radio" name="isMale" value="女" v-model="sex">
+      </label>
+      <br> {{sex}}
+    </div>
+    <!-- 6. 下拉列表 -->
+    <div>
+    	<select v-model="student">
+    		<option value="">请选择学生</option>
+    		<option value="赵高恒">赵高恒</option>
+    		<option value="蒋永浩">蒋永浩</option>
+    		<option value="罗虎">罗虎</option>
+    		<option value="左潇">左潇</option>
+    		<option value="王建春">王建春</option>
+    	</select>
+    	<br>
+    	{{student}}
+    </div>
+    <!-- 7. 多选列表 -->
+    <div>
+    	<select v-model="students" multiple>
+    		<option value="">请选择学生</option>
+    		<option value="赵高恒">赵高恒</option>
+    		<option value="蒋永浩">蒋永浩</option>
+    		<option value="罗虎">罗虎</option>
+    		<option value="左潇">左潇</option>
+    		<option value="王建春">王建春</option>
+    	</select>
+    	<br>
+    	{{students}}
+    </div>
+    <!-- 修改符 -->
+    <!-- 
+    .lazy
+    .number
+    .trim
+    -->
+    <div>
+    	<input type="text" name="" v-model.lazy="msg">
+    	<br>{{msg}}
+    	<!-- 下面是两种实现绑定数据为数字方式 -->
+    	<input type="text" v-model.number="num">
+    	<input type="number" v-model="num2">
+    	<br>{{num + num2}}
+    </div>
+  </div>
+</body>
+<script type="text/javascript">
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!',
+    name: "张三",
+    multiline: '',
+    agree: true,
+    hobbys: ["台球"],
+    sex: "女",
+    student:"左潇",
+    students:[],
+    msg:"",
+    num:10,
+    num2:10
+  }
+})
+</script>
+
+</html>

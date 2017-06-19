@@ -1,0 +1,55 @@
+webpack配置
+1、全局安装webpack
+    npm install webpack -g
+
+2、安装模块（各种资源加载器）
+    npm init
+    npm install style-loader --save-dev         #通过style-loader，从js文件中读取css模块，写入style标签
+    npm install css-loader --save-dev           #通过css-loader，可以读取css文件，作为一个模块写入js文件
+    npm install babel-loader --save-dev         #babel转换器      
+    npm install babel-core --save-dev           #babel-loader依赖的模块
+    npm install babel-preset-es2015 --save-dev  #babel转码模块 es2015转码规则
+
+3、babel配置文件 .babelrc
+
+4、webpack配置文件 webpack.config.js
+
+5、终端执行命令 webpack 
+
+
+
+
+webpack的开发环境
+1、当项目逐渐变大了，webpack的时间会越来越长，通过参数可以让编译的内容带颜色和进度。
+    webpack --progress --colors
+
+2、每次修改都需要编译，可以开启监听模式，那么每次更改自动更新。
+    webpack --progress --colors --watch
+
+
+3、使用 webpack-dev-server 开发服务是一个更好的选择
+webpack-dev-server 将在 localhost:8080 启动一个 express 静态资源 web 服务器，
+并且会以监听模式自动运行 webpack，在浏览器打开 http://localhost:8080/ 或
+http://localhost:8080/webpack-dev-server/ 可以浏览项目中的页面和编译后的资源输出，
+并且通过一个 socket.io 服务实时监听它们的变化并自动刷新页面。
+
+3.1、安装webpack-dev-server模块
+    npm install webpack-dev-server -g
+
+3.2、终端执行 webpack-dev-server  命令，开启一个服务器；
+
+webpack-dev-server类似anywhere；
+不同点：如果模块发生变化，使用webpack-dev-server页面会自动刷新；anywhere不会；
+
+
+
+
+附录:
+webpack中文参考网站
+http://webpackdoc.com/index.html
+
+webpack官网
+http://webpack.github.io/
+
+CommonJS,AMD,CMD,UMD,ES6模块  
+http://webpackdoc.com/module-system.html

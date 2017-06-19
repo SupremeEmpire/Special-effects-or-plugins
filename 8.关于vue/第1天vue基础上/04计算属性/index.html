@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>计算属性</title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="author" content="尹学江">
+  <script src="../vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <span>我今年{{ age }}岁了</span><br>
+    <span>我出生成{{ b }}年</span>
+    <span>我出生成{{ birthYear }}年</span>
+    <span>我出生成{{ birthY }}年</span>
+  </div>
+</body>
+<script type="text/javascript">
+var app = new Vue({
+  el: '#app',
+  data: {
+    age:20,
+    // birthYear:1997
+    b:''
+  },
+  methods:{
+  	toBirthYear(){
+  		console.log(11111111)
+  		let year = new Date().getFullYear();
+  		return year - this.age;
+  	}
+  },
+  // 存放一些计算的属性
+  computed:{
+  	// 只有get 没有set属性
+  	birthYear:function(){
+  		console.log(2222222)
+  		let year = new Date().getFullYear();
+  		return year - this.age;
+  	},
+  	// 即有get 又有set的
+  	birthY:{
+  		// 设置缓存
+  		cache:false,
+  		get(){
+  			let year = new Date().getFullYear();
+  			return year - this.age;
+  		},
+  		set(val){
+  			let year = new Date().getFullYear();
+  			this.age = year - val;
+  		}
+  	}
+
+  }
+})
+// methods里面的函数每次都会被执行(即便是参数相同，得到的结果相同，函数也会被运行)
+// computed（结果会被缓存起来，相同的内容只会运行一次函数）
+// setInterval(function(){
+// 	app.age = 5;
+// 	app.b = app.toBirthYear();
+// },1000)
+app.age = 10;
+app.birthY = 1997;
+
+
+</script>
+
+</html>

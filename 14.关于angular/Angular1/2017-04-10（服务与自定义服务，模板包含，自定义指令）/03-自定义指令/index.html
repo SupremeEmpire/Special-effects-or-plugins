@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="JZH">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="angular.js"></script>
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
+    <script src="./bootstrap/js/jquery-3.1.1.js"></script>
+    <script src="./bootstrap/js/bootstrap.js"></script>
+    <title></title>
+    <style>
+        
+    </style>
+</head>
+<body ng-app="app" ng-controller="ctrl">
+   <!--标签指令-->
+   <!--<zy-nav></zy-nav>-->
+   <!--属性指令-->
+   <!--<div zy-nav></div> -->
+   <!--class指令-->
+   <!--<div class="zy-nav"></div>-->
+   <!--注释指令:注释两边一定要留空格,
+       使用注释指令 replace 取值为 true 才能解析
+   -->
+   <!-- directive:zy-nav -->
+   
+   <zy-clock></zy-clock>
+   <button type="button">登录</button>
+   <a class="btn btn-primary" data-toggle="modal" href='#alert'>登录</a>
+   <!--
+     给自定义指令添加自定义的属性,可以让用户自定义模态框的数据
+   -->
+   <zy-modal modal-id="alert" modal-title="自定义模态框"
+   modal-confirm-title="确定" modal-cancle-title="取消"
+   modal-confirm-action="confirmClick()">
+       可以写任意想在模态框 modal-body中显示的内容
+    <form action="">
+        <input type="text" placeholder="用户名">
+        <input type="password" placeholder="密码"> 
+    </form>
+   </zy-modal>
+  <script src="zyModal.js"></script>
+</body>
+<html>
+<script>
+//导入依赖的模块 modal 
+angular.module('app',['modal']) 
+.controller('ctrl',['$scope',function($scope){
+    console.log($scope)
+    $scope.name = 'Tom';
+    //实现模态框绑定的方法 
+    $scope.confirmClick= function(){
+        console.log('点击了模态框的确认按钮')
+    }
+}])   
+//自定义指令 directive()
+//参数1:指令的名称:定义时采用驼峰命名法,使用时 大写变小写,单词之间只用 - 连接
+//参数2:指令的定义函数  
+//一般会把一个功能的代码片段封装成一个指令,指令可以重用,简化了页面,使逻辑清晰 
+.directive('zyNav',function(){
+  //return 出去的内容就是整个指令对象
+  return {
+  //restrict:限定,约束
+  //restrict:限制指令只能通过指定的方式通过,有以下几种取值
+  //E:element 作为标签元素使用
+  //C:class   作为类名使用
+  //M:comment 作为注释使用
+  //A:attribute 作为属性来使用 
+  //这些取值可以单独使用,可以混在一起使用,默认是EA   
+   restrict:'ECMA',
+   //template:'<h1>自定义指令</h1>',//指令对应的模板
+   templateUrl:'./template/nav.html',//指定一个html文件作为它的模板
+   //是否用模板替换当前指令元素,默认是false,
+   //true:编译时将使用模板替换指令元素,页面上就不会再有zy-nav标签
+   //false: 编译时,将使用模板替换指令元素的内容,模板包含在<zy-nav>标签内部
+   replace:true,
+   //scope:false,//默认值,共享父级作用域
+   //scope:true,//继承父级作用域并创建自己的作用域
+   //scope:{},//创建属于自己的独立作用域,与父级毫无关系(隔离作用域)
+   //link:表示当指令被 angular 编译后,执行后面的方法
+   //该方法接收三个参数
+   //$scope:指定所在的作用域对象,默认共享父级作用域
+   //ele:指令所在标签元素JQLite对象(JQLite:轻量型的JQuery),
+   //可以调用Jquery的方法
+   //attrs:指令所在标签的自定义属性    
+   link:function($scope,ele,attrs){
+    console.log($scope);
+    console.log(ele);
+    console.log(attrs);
+   }
+  }
+}) 
+.directive('zyClock',function(){
+  return{
+      restrict:'E',
+      template:'<div><strong></strong></div>',
+      replace:true,
+      link:function($scope,ele,attrs){
+          function getTime(){
+          ele.find('strong').text(new Date());
+      } 
+      getTime();
+      setInterval(getTime,1000); 
+    }
+  } 
+}); 
+</script>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="author" content="金西振">
+    <title></title>
+    <script src="angular.js"></script>
+    <style>
+        /*根据表单的状态样式类，添加样式，提示用户*/
+        input[type=text].ng-valid{
+            color: green;
+        }
+        input[type=text].ng-invalid{
+            color: red;
+        }
+    </style>
+</head>
+<body ng-app="">
+    <!--
+        novalidate 禁用提交表单时浏览器的默认验证功能
+        HTML5中新增的属性
+    -->
+    <form novalidate>
+        <input type="text" ng-model="username" required ng-pattern="'[a-zA-Z]{2,5}'">
+        <input type="number" ng-model="age" min="0" max="30" required>
+        <input type="submit" value="登录">
+    </form>
+
+</body>
+</html>
+<script>
+    
+</script>

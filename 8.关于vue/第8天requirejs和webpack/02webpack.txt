@@ -1,0 +1,71 @@
+一、WebPack是什么？
+http://www.jianshu.com/p/b95bbcfc590d 网站中(增加webpack.config.js文件里面的loader后面的内容是错的)
+	比gulp强大
+	一个打包工具
+	一个模块加载工具
+	各种资源都可以当成模块来处理
+
+	补充：自动化构建工具
+	各种资源都可以当成js来处理
+
+	html
+	css 
+	less
+	.coffee
+	es6 
+
+	都可以 转公成   js(es5)
+
+二、WebPack的特点
+
+1. 丰富的插件，方便进行开发工作
+2. 大量的加载器，包括加载各种静态资源
+3. 代码分割，提供按需加载的能力
+4. 发布工具
+
+三、WebPack的优势
+1. webpack 是以 commonJS 的形式来书写脚本滴，但对 AMD/CMD 的支持也很全面，方便旧项目进行代码迁移。
+2. 能被模块化的不仅仅是 JS 了。
+3. 开发便捷，能替代部分 grunt/gulp 的工作，比如打包、压缩混淆、图片转base64等。
+4. 扩展性强，插件机制完善，特别是支持 React 热插拔（见 react-hot-loader ）的功能让人眼前一亮。
+
+
+四、WebPack的安装
+
+1. 安装命令 （一次） 全局
+npm install webpack -g
+
+2.  npm install webpack --save-dev #将webpack增加到package.json文件中
+
+3. 如果想要安装开发工具
+$ npm install webpack-dev-server --save-dev
+
+五 webpack体验
+1. 把js打包成js
+2.webpack 支持模块化
+3.webpack 加载器
+
+css 加载器 css-loader	   功能把css打包成js
+style 加载器 style-loader 功能把css添加到页面中去
+npm install css-loader style-loader
+
+
+六 webpack 正常使用
+1.先写配置文件 
+webpack.config.js
+2.执行命令
+webpack
+
+七 webpack-dev-server服务器的功能 使用
+作用: 设置服务器好处  是当文件发生变化时  
+会自动执行重新生成文件
+
+需要执行命令:
+$ webpack-dev-server --progress --colors
+
+八 es6转es5语法
+安装
+babel-loader
+babel-core
+
+babel-preset-es2015

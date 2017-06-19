@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>可选择皮肤jQuery日期选择器 - 站长素材</title>
+	<link rel="stylesheet" href="css/datedropper.css" />
+	<link rel="stylesheet" href="css/timedropper.min.css" />	
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/datedropper.min.js"></script>
+	<script type="text/javascript" src="js/timedropper.min.js"></script>
+
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		input {
+			display: block;
+			width: 200px;
+			height: 20px;
+			line-height: 20px;
+			padding: 8px 10px;
+			border: 1px solid #999;
+			margin: 20px;
+			border-radius: 3px;
+		}
+	</style>
+</head>
+
+<body>
+	<center>
+		<input type="text" id="init" />
+		<input type="text" id="ddd" />
+	</center>
+</body>
+<script type="text/javascript">
+	$(function () {
+		$('#init').dateDropper({
+			placeholder: '点击获取日期'
+		});
+		$('#ddd').timeDropper({
+			color: '#567', 				
+			// 12小时制(true)还是24小时制(false)
+			meridians: false,
+			// HH:mm 按照24小时制的格式进行字符串格式化  hh:mm 按照12小时制的格式进行字符串格式化 
+			format: 'HH:mm',  
+		});
+	});
+
+</script>
+
+</html>

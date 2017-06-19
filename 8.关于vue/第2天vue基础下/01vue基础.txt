@@ -1,0 +1,148 @@
+一、 框架和库区别
+jQuery  
+animate.css  css动画库
+
+
+Vue.js 框架  简单，功能还算强大
+AngularJS 版本1
+angular2 版本2
+
+
+库：库只是比较实用一种工具 只是页面级别
+
+框架：
+1. 模块化编程（避免产生全局变量，在多人协作开发时，每个人js相互不产生影响，并且又可以相互引用）
+（面相对象开发）（把一些变量作为对象属性，把一些函数作为对象的方法来使用）
+
+(function(){
+	一块内容
+})()
+
+2. 提供完备路由机制
+路由简单理解为地址（index.html?name=张三）
+
+3. 模板引引擎
+
+当前五大js是什么？
+nodejs
+angularjs
+vuejs
+reactjs
+jquery
+
+二、Vue框架 介绍
+渐进式 Javascript框架
+
+三、Vue模板与对象绑定
+<div id="app">
+	<span>{{message}}</span>
+</div>
+
+// 创建一个vue的实例
+let app = new Vue({
+	// 指定模板
+  el: "#app",
+  // 绑定数据
+  data: {
+    message: "hello world!"
+  }
+})
+
+四、模板语法（大部分又叫指令）
+
+1. 插入值
+{{}}
+
+2. 绑定属性(动态绑定属性)
+ v-bind:title="title"
+
+3. 条件v-if  是否生成标签
+
+4. 循环v-for
+
+5. v-on 绑定事件
+
+6. v-model="变量"
+
+7. v-html 绑定html
+
+8. v-once 内容数据只解析一次
+
+9. v-show 显示隐藏标签
+
+五、vue 实例的 选项
+new Vue({
+	
+})
+1. el 指定模板 
+
+2. data 数据的对象
+
+3. methods:方法的对象
+
+4. filters: 过滤器对象
+
+5. computed: 计算属性
+
+
+六、指令
+1. 指令（Directives） 是带 v- 前缀特殊属性。
+
+(1) 指令名
+v-if
+v-on
+v-show
+指令名决定指令的作用
+
+(2) 指令参数  :后加的是参数
+<div v-bind:title="title"></div>
+<div v-on:click="fun"></div>
+
+(3) 修饰符
+修饰符（Modifiers）是以半角句号 . 指明的特殊后缀，用于指出一个就该以特殊方式绑定
+v-on 常用的修饰符
+1. .stop - 调用 event.stopPropagation()。
+2. .prevent - 调用 event.preventDefault()。
+3. .once - 只触发一次回调。
+
+键修饰符，键别名
+<input @keyup.enter="onEnter">
+键修饰符，键代码
+<input @keyup.13="onEnter">
+
+七、缩写
+v-on: 缩写  @
+v-bind: 缩写  :
+<div :title="title"></div>
+<div @click.prevent="fun"></div>
+
+八、过滤器 |
+filters:{
+	
+}
+
+九、计算属性
+
+computed:{
+	
+}
+计算属性和函数区别？
+// methods里面的函数每次都会被执行(即便是参数相同，得到的结果相同，函数也会被运行)
+// computed（结果会被缓存起来，相同的内容只会运行一次函数）
+
+
+十、style和class绑定
+这两个属性比较（常用）所以说做了特殊处理 
+这两个值可以是对象或数组   其它的属性只能是字符串或数字
+
+
+十一、template
+指令是写在标签上的，如果不想显示标签那么就用template来代替
+
+key作用注意一下
+
+十二、全局创建过滤器
+Vue.filter("过滤器名",function(text){
+	
+})
+

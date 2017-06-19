@@ -1,0 +1,23 @@
+webpack：最为强大的前端模块管理和打包工具，能够将琐碎的各种文件资源按照依赖关系打包成一个整体。
+可以通过webpack进行模块化编程，也可以把浏览器不能直接加载的文件通过加载器加载使用
+
+1、全局安装webpack
+    npm install webpack -g      #全局安装webpack
+
+2、单文件转换(js文件转换)
+    webpack index.js build.js     #然后编译 index.js 并打包到 build.js：
+
+
+Webpack 本身只能处理 JavaScript 模块，如果要处理其他类型的文件，就需要使用 loader 进行转换。
+Loader:模块和资源的转换器，借助loader可以加载任何类型的模块或文件
+loader 一般以 xxx-loader 的方式命名，xxx 代表了这个 loader 要做的转换功能，比如 css-loader。
+
+如果想加载css文件，就要使用 style-loader和 css-loader
+
+1、安装模块
+    npm init
+    npm install style-loader --save-dev         #通过style-loader，从js文件中读取css模块，写入style标签
+    npm install css-loader --save-dev           #通过css-loader，可以读取css文件，作为一个模块写入js文件
+
+2、重新编译打包，刷新页面，就可以看到css里面的设置的样式生效了
+    webpack entry.js bundle.js --module-bind "css=style-loader!css-loader"

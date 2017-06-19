@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>生成颜色</title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="author" content="李泽举">
+  <script type="text/javascript" src="vue.js"></script>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      width: 800px;
+      margin: 0 auto;
+    }
+
+    .color-box {
+      width: 500px;
+      height: 100px;
+      margin-bottom: 50px;
+    }
+    /*  scroll 一块内容*/
+    .scroll {
+      width: 600px;
+      height: 10px;
+      padding: 10px 0;
+      display: inline-block;
+      position: relative;
+    }
+    .scroll .scroll-bar {
+      height: 8px;
+      border: 1px solid #000;
+      border-radius: 5px;
+    }
+    .scroll .mask {
+      position: absolute;
+      top: 11px;
+      left: 1px;
+      height: 8px;
+      background-color: #00ffff;
+      width: 598px;
+      border-radius: 4px;
+
+      width: 114px;
+    }
+    .scroll .bar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      position: absolute;
+      background: radial-gradient(white, grey);
+      border: 1px solid grey;
+      top: 0px;
+      left: -15px;
+      /* 要修改 */
+      left: 100px;
+    }
+
+    ul,
+    li {
+      list-style: none;
+    }
+
+    ul li {
+      padding: 6px 0;
+    }
+
+    ul li span {
+      display: inline-block;
+      height: 30px;
+      line-height: 30px;
+      position: relative;
+      top: 0;
+      width: 135px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="color-box" :style="{background:calcColor}"></div>
+    <ul>
+      <li>
+        <span>红色配比：{{Math.round(r*100)}}%</span>
+        <!-- v-model="r" 绑定一个数据r  监听一个input事件  -->
+        <scroll :width="400" color="red" v-model="r"></scroll>
+          <li>
+            <span>绿色配比：{{Math.round(g*100)}}%</span>
+            <scroll :width="400" color="green" v-model="g"></scroll>
+
+              <li>
+                <span>蓝色配比：{{Math.round(b*100)}}%</span>
+                <scroll :width="400" color="blue" v-model="b"></scroll>
+
+    </ul>
+  </div>
+</body>
+<!-- 组件模板 -->
+<script type="text/html" id="scroll">
+  <div class="scroll" :style="{width:width+'px'}">
+    <div class="scroll-bar"></div>
+    <div class="mask" :style="{background:color,width:width*selfValue-1+'px'}"></div>
+    <!--注意：关键-->
+    <div class="bar" @mousedown="mousedown" :style="{left:width*selfValue-14+'px'}"></div>
+    <!-- 绑定一个自定义 处理值 -->
+    <!-- left  barWidth * 0.3 -->
+
+  </div>
+</script>
+<script type="text/javascript">
+  // 注册组件
+  Vue.component('scroll', {
+    template: '#scroll',
+    // 属性传值
+    props: {
+      width: {
+        type: Number,
+        default: 400
+      },
+      color: {
+        type: String,
+        default: 'red'
+      },
+      value: {
+        type: Number,
+        default: 0.5
+      }
+    },
+    // 数据部分
+    data: function () {
+      return {
+        selfValue: this.value,
+      }
+    },
+    methods: {
+
+      mousedown: function (event) {
+        var scroll = document.getElementsByClassName('scroll');
+        var bar = document.getElementsByClassName('bar');
+        var mask = document.getElementsByClassName('mask');
+        //   var event = event || window.event; ///标准化事件对象（W3C DOM 和IE DOM ）
+        //   //  var leftVal = event.clientX - this.offsetLeft;
+        // console.log(leftVal);
+        // 拖动一定要写到 down 里面才可以
+        document.onmousemove = function (event) {
+          var event = event || window.event; ///标准化事件对象（W3C DOM 和IE DOM ）
+          // barleft = event.clientX - leftVal;
+          var calcValue = event.clientX - this.$el.offsetLeft;
+          calcValue = calcValue <= 0 ? 0 : calcValue;
+          calcValue = calcValue >= this.width ? this.width : calcValue;
+          this.selfValue = calcValue / this.width;
+          // 数据传递出去   配合v-model使用
+          this.$emit('input', this.selfValue)
+          //防止选择内容--当拖动鼠标过快时候，弹起鼠标，bar也会移动，修复bug
+          window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
+        }.bind(this);
+      }
+    }
+  })
+
+  // 创建一个vue实例
+  let app = new Vue({
+    el: "#app",
+    data: {
+      g: 0.5,
+      r: 0.5,
+      b: 0.5
+
+    },
+    computed: {
+      calcColor() {
+
+        let r = Math.floor(this.r * 255)
+        let g = Math.floor(this.g * 255)
+        let b = Math.floor(this.b * 255)
+        return `rgb(${r},${g},${b})`
+      }
+    }
+  })
+  document.onmouseup = function () {
+    document.onmousemove = null; //弹起鼠标不做任何操作
+  }
+
+</script>
+
+<html>

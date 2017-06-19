@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="author" content="李泽举">
+    <title></title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="../../js/lodash.js"></script>
+    <style>
+        .lists span {
+            display: inline-block;
+            padding: 0px 10px;
+            line-height: 30px;
+        }
+        /* css动画 */
+        .list-enter-active,
+        .list-leave-active{
+            transition:  all 0.4s;
+        }
+        .list-enter{
+            opacity: 0;
+            transform: translateY(100px)
+        }
+        .list-leave-active{
+            opacity: 0;
+            transform: translateY(100px);
+            /* 注意:当删除那一刻,改变它的位置 */
+            position: absolute;
+            /* display: none!important 解决优先级,直接消失 */
+            /*display: none!important*/
+        }
+        /* 平移动画 */
+        .list-move {
+            transition: all 1s;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="shuffle">打乱</button>
+        <button @click="add">添加</button>
+        <button @click="remove">删除</button>
+        <transition-group name="list" tag="div" class="lists">
+            <span v-for="num in nums" :key="num">{{num}}</span>
+            
+        </transition-group>
+    </div>
+</body>
+
+</html>
+
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            message: 'hello vue!',
+            nums: new Array(10).fill().map((e, i) => i),
+            nextNum:11
+        },
+        methods: {
+            shuffle() {
+                // this.nums.sort(function () {
+                //     return Math.random() - 0.5
+                // })
+                this.nums=_.shuffle(this.nums)
+            },
+            randomIndex(){
+                return Math.floor(Math.random()*this.nums.length)
+            },
+            add(){
+                this.nums.splice(this.randomIndex(),0,this.nextNum++)
+            },
+            remove(){
+                this.nums.splice(this.randomIndex(),1)
+            }
+        }
+    })
+// setInterval(function(){
+//     app.shuffle()
+// },500)
+</script>

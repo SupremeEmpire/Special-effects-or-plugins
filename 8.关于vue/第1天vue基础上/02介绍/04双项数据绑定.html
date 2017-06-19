@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Vue双项数据绑定</title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="author" content="尹学江">
+  <script src="../vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+  	<!-- 双项数据绑定 -->
+  	<!-- 1. 当数据发生变化时候，模板对应的也会发生相应的变化 -->
+  	<!-- 2. 当模板发生变化时数据也发生相应的变化（模板变化 - 表单） -->
+    <span>{{ num}}</span><br>
+    <input type="number" v-model="num">
+  </div>
+</body>
+<script type="text/javascript">
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!',
+    num:1
+  }
+})
+
+setInterval(function(){
+	app.num++
+},500)
+</script>
+
+</html>

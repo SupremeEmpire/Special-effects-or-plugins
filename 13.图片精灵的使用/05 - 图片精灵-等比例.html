@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片精灵-等比例显示</title>
+    <style>
+        div{
+            width: 144px;
+            height: 144px;
+            border: 1px solid red;
+        }
+        div:nth-child(1){
+            background-image: url(icons.jpg);
+        }
+        div:nth-child(2){
+            background-image: url(icons.jpg);
+            background-position: 0 -144px;
+        }
+        div:nth-child(3){
+            background-image: url(icons.jpg);
+            background-position: -432px -576px;
+        }
+
+        /*
+         为了避免网页中打量的零星图片频繁向服务器发送请求,
+         也为了减轻服务器压力和提高浏览器的加载速度,所以需要
+         将所有小图片集中在一张大图中,这样只需要发送一次请求
+         即可,这种技术叫做图片精灵.
+        */
+        /*精灵图的调整主要依靠background-position,
+        只需要将背景图按照指定的距离移动就可以在元素中
+        显示出想要的图片部分*/
+
+    </style>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+</body>
+</html>

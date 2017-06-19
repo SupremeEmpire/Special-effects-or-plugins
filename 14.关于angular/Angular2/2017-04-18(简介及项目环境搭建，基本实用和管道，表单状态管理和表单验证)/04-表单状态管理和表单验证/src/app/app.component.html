@@ -1,0 +1,52 @@
+<!--
+  表单输入状态         css样式类 真/假     
+  控件是否被访问过     ng-touchched/ng-untouched
+  控件的值是否已经变化  ng-dirty/ng-pristine
+  控件的值是否有效     ng-valid/ng-invalid
+
+  表单验证:
+  ng2 创建了 FormControl 并把它注册到了 NgForm 指令,再将该指令添加
+  到form标签
+  #变量名="ngForm" 来获取FormControl,这样就可以通过这个变量来获取表单
+  的整体验证结果
+  比如:#form="ngForm" form.valid和 form.dirty等
+  
+  ng2 在表单中使用[(ngModel)] 实现数据双向绑定,使用ngModel时必须定义
+  name属性
+  #变量名="ngModel" 来获取 ngModelControl,这样就可以通过这个变量来
+  获取表单验证结果
+  比如:#username="ngModel" username.valid和 username.dirty等
+
+  表单验证时:只有当<form>标签中所有的表单控件都验证通过时,表单验证菜通过
+-->
+<div class="container">
+  <p>{{p | json}}</p>
+  <form #form="ngForm" (submit)="submit()">
+    <p>表单整体验证结果:valid:{{form.valid}}----dirty:{{form.dirty}}</p>
+    <div class="form-group">
+      <label for="">姓名</label>
+      <input type="text" class="form-control" id="" placeholder="姓名"
+      #username="ngModel" [(ngModel)]="p.name" name="name"
+      autocomplete="off" required
+      >
+      <p>姓名的验证结果:valid:{{username.valid}}----dirty:{{username.dirty}}</p>
+      <div>姓名验证是否通过:{{username.valid ? '用户名验证通过' : '用户名不能为空'}}</div>
+    </div>
+    <div class="form-group">
+      <label for="">年龄</label>
+      <input type="number" class="form-control" id="" placeholder="年龄"
+      [(ngModel)]="p.age" #myage="ngModel" name="age" required 
+      min="18" max="50" maxlength="2"
+      >
+     <button type="submit" [disabled]="form.invalid" class="btn btn-primary">submit</button>
+    </div>
+   <div class="form-group">
+     <label>课程</label>
+     <select class="form-control" [(ngModel)]="p.course" name="course">
+        <option *ngFor="let c of course" [value]="c">{{c}}</option>
+     </select>
+   </div
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  
+</div>

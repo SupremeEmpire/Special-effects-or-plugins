@@ -1,0 +1,38 @@
+1.build
+是一个webpack文件 配置参数 一般情况不用动
+
+2.config
+是vue项目的基本配置文件
+
+3.index.html
+项目的入口文件
+
+4. node_modules/
+node.js模块包
+
+5. package.json
+node,js项目配置文件
+
+6. README.md
+项目配置
+7. src/ (我们工作的目录)
+源代码文件夹, 基本上文件都放到这里
+
+    --main.js     入口文件
+    --App.vue     App.vue组件 (项目根组件)-单文件组件
+    --assets/     资源文件夹,里面放置一些静态资源 如:css 图片,音频,视频 js等等
+    --components/ 单文件组件文件夹(不是一定非要放这里面,选择性)
+    --router/     路由
+    ----index.js  配置路由文件
+8. static/
+生成好的文件将会放到这里面
+.babelrc   是babel的编译参数  vue开发时需要babel编译的
+.gitgnore  用来说明哪些文件    不上传到git仓库里
+
+
+
+访问顺序: (这三个是最主要的)
+1.index.html
+2.src/main.js
+3.App.vue
+4.src/router/index.js  配置路由的

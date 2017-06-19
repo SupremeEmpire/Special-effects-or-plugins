@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Vue</title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="author" content="尹学江">
+  <script src="vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 使用组件 -->
+    <my-component :prop-a="1" :prop-c="true" :prop-d="2000"></my-component>
+    <my-component :prop-b="'这是一个字符串'" :prop-c="false"></my-component>
+  </div>
+</body>
+<script type="text/html" id="my-component">
+  <div>{{propA}} {{propB}}
+    <div v-if="propC">能不能看到我</div>
+    <p>{{propD}}</p>
+  </div>
+</script>
+<script type="text/javascript">
+// 创建组件
+Vue.component('my-component', {
+    template: '#my-component',
+    // 传属性
+    props: {
+      // 基础类型 null 任何类型
+      propA: Number,
+      // 可以多种类型的
+      propB: [Number, String],
+      // 参数必须传 并 类型为布尔
+      propC: {
+        type: Boolean,
+        required: true
+      },
+      // 默认值
+      propD:{
+      	type:Number,
+      	default:1000
+      }
+    },
+    data: function() {
+      return {
+        message: "hello world!"
+      }
+    }
+  })
+  // vue 实例
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!'
+  }
+})
+</script>
+
+</html>

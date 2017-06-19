@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Vue 钩子函数</title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="author" content="尹学江">
+  <script src="vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+  <!-- <component></component> -->
+  <!-- 创建完成 -->
+  <!-- 挂载数据 (把js数据输出到模板上) （挂载数据是异步的） -->
+
+
+    <!-- 使用组件 -->
+    <!-- 有标签创建组件   (创建 js方面) -->
+    <my-component ref='com1'></my-component>
+    <my-component></my-component>
+    <!-- 创建完成 -->
+    <!-- 挂载数据 (把js数据输出到模板上)  -->
+
+		<!-- 有标签创建组件   (创建 js方面) -->
+
+		<!-- 上面结论：组件需要上一个挂载完成(没有执行挂载函数) 才会创建第二个组件 -->   
+
+   <!-- 结论：所有都挂载完成之后，才把按顺序执行挂载完成函数 -->
+   <!-- 组件1挂载完成 -->
+   <!-- 组件2挂载完成 --> 
+  </div>
+</body>
+<script type="text/html" id="my-component">
+  <div>{{message}}</div>
+</script>
+
+<script type="text/html" id="component">
+  <div><span v-for="value in 1000">{{value}}</span></div>
+</script>
+<script type="text/javascript">
+// 创建组件
+Vue.component('my-component', {
+  template: '#my-component',
+  data: function() {
+    return {
+      message: "hello world!"
+    }
+  },
+  beforeCreate: function() {
+    console.log('组件创建之前！');
+  },
+  created: function() {
+    console.log('组件创建完成之后')
+  },
+  beforeMount: function() {
+    console.log('组件挂载之前')
+  },
+  mounted: function() {
+    console.log('组件挂载完成之后')
+  },
+  beforeUpdate: function() {
+    console.log('组件更新之前')
+  },
+  updated: function() {
+    console.log('组件更新完成之后')
+  },
+  beforeDestroy: function() {
+    console.log('组件销毁之前')
+    // 找到组件对应的dom
+    app.$refs.com1.$el.remove();
+  },
+  destroyed: function() {
+    console.log('组件销毁之后')
+  },
+  deactivated: function() {
+    console.log('deactivated')
+  }
+});
+
+// 创建组件2
+Vue.component('component', {
+  template: '#component',
+  data: function() {
+    return {
+      message: "hello world!"
+    }
+  },
+  beforeCreate: function() {
+    console.log('component---组件创建之前！');
+  },
+  created: function() {
+    console.log('component---组件创建完成之后')
+  },
+  beforeMount: function() {
+    console.log('component---组件挂载之前')
+  },
+  mounted: function() {
+    console.log('component---组件挂载完成之后')
+  },
+  beforeUpdate: function() {
+    console.log('component---组件更新之前')
+  },
+  updated: function() {
+    console.log('component---组件更新完成之后')
+  },
+  beforeDestroy: function() {
+    console.log('component---组件销毁之前')
+   
+  },
+  destroyed: function() {
+    console.log('component---组件销毁之后')
+  },
+  deactivated: function() {
+    console.log('component---deactivated')
+  }
+});
+
+
+// vue 实例
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!'
+  }
+})
+
+setTimeout(function(){
+	app.$refs.com1.message = "您好世界！"
+},2000)
+
+setTimeout(function(){
+	// 销毁组件
+	// app.$refs.com1.$el
+	app.$refs.com1.$destroy();
+},3000)
+</script>
+
+</html>

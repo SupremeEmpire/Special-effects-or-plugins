@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Vue事件处理</title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="author" content="尹学江">
+  <script src="../vue.js"></script>
+  <style type="text/css">
+  	.box{
+  		width: 100px;
+  		height: 100px;
+  		position: fixed;
+  		background-color: red;
+  		top: 100px;
+  	}
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 1. 监听事件 -->
+    {{counter}}
+    <button @click="count">增加</button>
+    <button @click="greet('小明',$event)">您好</button>
+    <br>
+    <div class="box" :style="styleObj"></div>
+    <input type="text" @keyup.left="left"  @keyup.right="right">
+    <!-- 全部的按键名称
+    .enter 
+    .tab
+    .delete(捕获‘删除’和‘退格’)
+    .space
+    .up
+    .down
+    .left
+    .right
+    .ctrl
+    .alt
+    .shift
+     -->
+  </div>
+</body>
+<script type="text/javascript">
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!',
+    counter:0,
+    styleObj:{
+    	left:"100px"
+    }
+  },
+  methods:{
+  	count(){
+  		this.counter++
+  	},
+  	greet(person,e){
+  		alert('您好' + person + "!")
+  		// 参数e代表鼠标事件
+  		console.log(e);
+  	},
+  	left(){
+  		let l = this.styleObj.left;
+  		this.styleObj.left = parseInt(l.substring(-2))-5 +"px";
+  	},
+  	right(){
+  		let l = this.styleObj.left;
+  		this.styleObj.left = parseInt(l.substring(-2))+5 +"px";
+  	}
+  }
+})
+</script>
+
+</html>

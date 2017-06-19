@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="author" content="李泽举">
+    <title></title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <style>
+        /*button{
+            position: absolute;
+            top: 0;
+            left: 0;
+        }*/
+
+        .fade-enter-active {
+            transition: all 0.4s ease-in;
+        }
+
+        .fade-enter {
+            opacity: 0;
+            transform: translate(100px, 0)
+        }
+
+        .fade-leave-active {
+            opacity: 0;
+            transition: all 0.4s ease-out;
+        }
+        /*.fade-leave{}*/
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 一般情况transition 不允许有两个标签
+            v-if  v-else 除外
+            注意: if else 当两个标签相同时,不会重新渲染标签,
+                    需要添加一个key值,key值不能相同
+                    添加方法:mode:"out-in"
+         -->
+        <transition name="fade">
+            <button v-if="seen" key="on" @click="seen=!seen">开</button>
+            <button v-else key="off" @click="seen=!seen">关</button>
+        </transition>
+    </div>
+</body>
+
+</html>
+
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            message: 'hello vue!',
+            seen: true
+        }
+    })
+
+</script>

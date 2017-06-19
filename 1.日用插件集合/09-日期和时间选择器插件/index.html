@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>日期和时间选择插件</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<!-- 引入日期的css样式-->
+		<link rel="stylesheet" type="text/css" href="css/datedropper.css">
+		<!-- 引入时间的css样式-->
+		<link rel="stylesheet" type="text/css" href="css/timedropper.min.css">
+		<style type="text/css">
+			.demo {
+				margin: 80px auto 40px auto;
+				width: 320px
+			}
+			.input {
+				width: 100px;
+				padding: 6px;
+				border: 1px solid #d3d3d3
+			}
+		</style>
+	</head>
+	<body>
+		<div id="main">
+			<div class="demo">
+				<p>请选择日期：<input type="text" class="input" id="pickdate"/></p><br/>
+				<p>请选择时间：<input type="text" class="input" id="picktime"/></p>
+			</div>
+		</div>
+
+		<script type="text/javascript" src="js/jquery-1.12.3.min.js"></script>
+		<!-- 引入日期js -->
+		<script src="js/datedropper.min.js"></script>
+		<!-- 引入时间js -->
+		<script src="js/timedropper.min.js"></script>
+		<script>
+			$("#pickdate").dateDropper({
+				// 选择日期是否带动画
+				animate: true,
+				// Y:年   m:月   d:日
+				format: 'Y-m-d',
+				// 日期最多到多少年
+				maxYear: '2020'
+			});
+			$("#picktime").timeDropper({
+				// 12小时制(true)还是24小时制(false)
+				meridians: false,
+				// HH:mm 按照24小时制的格式进行字符串格式化        hh:mm 按照12小时制的格式进行字符串格式化 
+				format: 'HH:mm',
+			});
+		</script>
+	</body>
+</html>

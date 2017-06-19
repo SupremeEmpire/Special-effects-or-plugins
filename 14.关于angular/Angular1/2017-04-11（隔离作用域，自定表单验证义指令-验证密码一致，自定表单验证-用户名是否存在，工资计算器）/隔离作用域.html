@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="JZH">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="angular.js"></script>
+    <title>隔离作用域</title>
+<style>
+    
+</style>
+</head>
+<body ng-app="app" ng-controller="ctrl">
+ <p>父作用域的name:<input type="text" ng-model="name">{{name}}</p>
+ <p>子作用域的name:<span test-name name="name"></span></p>   
+</body>
+<html>
+<script>
+angular.module('app',[])
+.controller('ctrl',['$scope',function($scope){
+    console.log('ctrl-------')
+    console.log($scope); 
+    $scope.name = 'Tom';
+}])   
+.directive('testName',function(){
+  return{
+      restrict:'A',
+      template:`<input type="text" ng-model="name"></input>
+                <span>{{name}}</span>`,
+  //隔离作用域
+  scope:{
+      name:'=',
+  },
+  link:function($scope,ele,attrs){
+      console.log($scope);
+  }  
+  }
+})     
+</script>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="author" content="李泽举">
+    <title></title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- v-focus功能:使用这个指令,可以把光标聚焦定位到这个input里
+        多个input标签都使用这个指令   定位最后input标签里 -->
+        <input type="text" v-focus><br>
+        <input type="text" v-focus><br>
+        <input type="text" v-focus><br>
+        <input type="text" v-focus><br>
+        <input type="text" v-focus><br>
+        <input type="text" v-focus><br>
+        <input type="text" v-focus><br>
+        <input type="text" v-focus><br>
+        <input type="text" v-focus><br>
+        <input type="text" v-focus><br>
+        <span>{{message}}</span>
+    </div>
+</body>
+
+</html>
+
+<script>
+    // 定义指令Vue.directive
+    // 参数1:指令名 (不需要加v-) 使用时需要加v-
+    // 参数2: 对象
+    // 对象里提供定义指令的几个钩子函数(可选)
+    // bind:只调用一次,指令第一次绑定到元素时调用,可以定义一个在绑定时执行一次的初始化动作
+    // inserted:被绑定元素插入父节点时调用
+    // update:被绑定元素所在的模板更新时调用
+    // componentUpdated:被绑定元素所在模板完成一次更新周期时调用
+    // unbind:只调用一次.指令与元素解绑时调用
+    var i = 0;
+    Vue.directive("focus", {
+        inserted: function (el) {
+            i++
+            // el 被绑定元素
+            setTimeout(function(){
+                el.focus();
+            },i*1000)
+        }
+    })
+
+    var app = new Vue({
+        el: "#app",
+        data: {
+            message: 'hello vue!'
+        }
+    })
+
+</script>

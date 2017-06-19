@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>鼠标样式设置</title>
+    <style>
+        div{
+            width: 500px;
+            height: 30px;
+            border: 1px solid red;
+            margin-top: 5px;
+        }
+        body{
+            /*cursor自定义鼠标样式,url是使用外部图片作为
+            鼠标样式,但是此时必须后跟auto,防止当找不到
+            图片时还能使用默认的鼠标样式*/
+            cursor: url(fish.png),auto;
+        }
+        a{
+            /*默认样式,箭头*/
+            /*鼠标cursor的默认值是auto,即自动选择样式*/
+            cursor: default;
+        }
+        .fir1{
+            /*设置光标为十字样式*/
+            cursor: crosshair;
+        }
+        .fir2{
+            /*设置为小手样式*/
+            cursor: pointer;
+        }
+        .fir3{
+            /*设置光标为等待样式(旋转的圆圈或沙漏)*/
+            cursor: wait;
+        }
+        .fir4{
+            /*设置为帮助样式*/
+            cursor: help;
+        }
+    </style>
+</head>
+<body>
+    <a href="#">百度一下</a>
+    <div class="fir1">打开了赶紧打开即可告诉大家看法</div>
+    <div class="fir2">打开了赶紧打开即可告诉大家看法</div>
+    <div class="fir3">打开了赶紧打开即可告诉大家看法</div>
+    <div class="fir4">打开了赶紧打开即可告诉大家看法</div>
+</body>
+</html>

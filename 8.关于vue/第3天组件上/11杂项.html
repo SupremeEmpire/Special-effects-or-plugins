@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Vue</title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="author" content="尹学江">
+  <script src="vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 使用组件 -->
+    <!-- 通过ref来指定一个名称
+    尽管我们可以 通过props 和events来传数据，但是有时扔需要在Javascript中直接访问子组件
+    为此我们为子组件 使用ref 指定一个索引ID
+     -->
+     <com1></com1>
+    <my-component ref="component"></my-component>
+    <my-component ref="component2"></my-component>
+
+    
+  </div>
+</body>
+<script type="text/x-template" id="my-component">
+  <div></div>
+</script>
+<script type="text/javascript">
+// 创建组件
+// 递归组件 一定要写一个结束 否则会报 rangeError
+Vue.component('com1', {
+  template: '<div><com1 v-if="Math.random() >0.1"></com1> {{message}}</div>',
+  data: function() {
+    return {
+      message: "hello world!"
+    }
+  }
+});
+
+// 创建组件
+Vue.component('my-component', {
+  template: '#my-component',
+  data: function() {
+    return {
+      message: "hello world!"
+    }
+  }
+});
+// vue 实例
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!'
+  },
+  created: function() {
+    // 找到子组件
+    // 注意 $refs生成的时间 没有created早
+    // console.log(this.$refs.component)
+  }
+})
+console.log(app.$refs.component.$el.innerHTML = 'AAA')
+console.log(app.$refs.component2.$el.innerHTML = 'BBBB')
+</script>
+
+</html>

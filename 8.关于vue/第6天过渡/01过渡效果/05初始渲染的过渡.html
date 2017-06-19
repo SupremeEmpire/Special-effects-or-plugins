@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="author" content="李泽举">
+    <title></title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="jquery-3.1.1.js"></script>
+    <style>
+        .appear-box {
+            width: 200px;
+            height: 200px;
+            line-height: 200px;
+            background-color: green;
+            color: white;
+            text-align: center;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <span>{{message}}</span>
+        <button @click="seen=!seen">切换按钮</button>
+        <!--appear 出现  初始渲染的过渡
+       第一次出现时，会被调用before-appear appear，以后的切换就不会被调用了
+       则调用其他javascript 钩子函数-->
+        <!--:css="false" 会跳过css过渡动画-->
+        <transition 
+        @before-enter="beforeEnter" 
+        @enter="enter" 
+        @before-leave="before-leave" 
+        @leave="leave" 
+        appear 
+        @before-appear="beforeAppear"
+        @appear="appear" :css="false">
+            <div v-if="seen" class="appear-box">我是内容</div>
+        </transition>
+    </div>
+</body>
+
+<html>
+
+<script>
+    let app = new Vue({
+        el: "#app",
+        data: {
+            message:"hello vue!",
+            seen: true,
+        },
+        methods: {
+            beforeAppear(el) {
+                $(el).css({
+                    //   进入之前
+                    opacity: 0,
+                    left: 200,
+                })
+            },
+            appear(el, done) {
+
+                $(el).animate({
+                    opacity: 1,
+                    left: 0,
+                }, 400, "linear", function () {
+                    //    done() 动画执行完成
+                    done()
+                })
+            },
+            beforeEnter(el) {
+                // 进入之前改变样式
+                $(el).css({
+                    opacity: 0,
+                    top: 100,
+                })
+            },
+            // el当前dom元素
+            enter(el, done) {
+                // 进入
+                $(el).animate({
+                    opacity: 1,
+                    top: 0
+                }, 500, "linear", function () {
+                    // done是一个函数 用于告诉
+                    //  vue enter动画执行完成
+                    done()
+                })
+            },
+            beforeLeave(el) {
+            },
+            leave(el, done) {
+                $(el).animate({
+                    opacity: 0,
+                    top: 100,
+                }, 200, "linear", function () {
+                    // done是一个函数 用于告诉
+                    //  vue enter动画执行完成
+                    done()
+                })
+            }
+        }
+    })
+</script>

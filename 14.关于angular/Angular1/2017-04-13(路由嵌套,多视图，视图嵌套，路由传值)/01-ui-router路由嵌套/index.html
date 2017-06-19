@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="JZH">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="angular.js"></script>
+    <script src="angular-ui-router.js"></script>
+    <!--<link rel="stylesheet" href="index.css">-->
+    <title></title>
+<style>
+   nav{
+       width: 100%;
+       height: 44px;
+       box-shadow:0 0 1px #999;
+       position: fixed;
+       bottom: 0;
+       left: 0;
+       display:flex;
+       justify-content: space-around;
+   }    
+   a{
+     flex-grow: 1;
+     text-align: center;
+     line-height: 44px;
+   }
+   a:focus{
+     background-color: lightskyblue;
+   }    
+</style>    
+</head>
+<body ng-app="app">
+  <nav>
+      <a ui-sref="home">首页</a>
+      <a ui-sref="friends">好友</a>
+      <a ui-sref="settings">设置</a>
+  </nav>    
+  <main ui-view></main>
+</body>
+<html>
+<script>
+angular.module('app',['ui.router'])
+.config(['$stateProvider','$urlRouterProvider',
+function($stateProvider,$urlRouterProvider){
+ $urlRouterProvider.when('','/home').when('/home','/home/redian')
+ $stateProvider
+ .state('home',{
+     url:'/home',
+     templateUrl:'./home.html'
+ })
+ .state('friends',{
+     url:'/friends',
+     template:'<h1>好友</h1>'
+ })
+ .state('settings',{
+     url:'/settings',
+     template:'<h1>设置</h1>'
+ })
+//父状态.子状态  
+ .state('home.redian',{
+    url:'/redian',
+    template:'<h3>今年最火电视剧《人民的名义》</h3>'
+ })
+ .state('home.keji',{
+     url:'/keji',
+     template:'<h3>今年下半年最火电视剧《程序员的名义》</h3>'
+ })
+}])        
+</script>

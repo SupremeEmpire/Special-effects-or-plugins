@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>JD轮播图</title>
+<style>
+*{ padding:0; margin:0; list-style:none; text-decoration:none; border:0;}
+.box{ width:730px; height:454px; margin:100px auto; border:3px solid red; position:relative;}
+.tu li{ position:absolute; left:0; top:0; display:none;}
+.shu{ position:absolute; bottom:20px; text-align:center;  width:730px;}
+.shu li{ width:10px; height:10px; border-radius:50%; background:#333; text-align:center; line-height:20px; display:inline-block;}
+.shu li.ac{ background:red;}
+.shu li a{ color:#fff; font-size:14px;}
+.btn{ width: 30px; height:60px; position: absolute; background:rgba(0,0,0,0.5);  color:#fff; text-align: center; line-height:60px;top:50%; margin-top:-30px; cursor: pointer; display: none;}
+.btn_l{ left:0; }
+.btn_r{right:0; }
+
+</style>
+
+<script type="text/javascript" src="js/jquery-1.7.2.js"></script>
+<script type="text/javascript">
+$(function(){
+	var iNow=0;
+	var timer = null;
+	var aLi = $(".tu li");
+	var aNum = $(".shu li");
+	aLi.eq(0).show();
+	aNum.eq(0).addClass("ac");
+
+	//手动控制轮播特效	
+ 	aNum.mouseover(function(){
+		iNow=$(this).index();
+		aLi.eq(iNow).fadeIn(500).siblings().fadeOut(500);
+		aNum.eq(iNow).addClass("ac").siblings().removeClass("ac");
+	})
+	function tab(){
+		aLi.eq(iNow).stop().fadeIn(500).siblings().fadeOut(500);
+		aNum.eq(iNow).addClass("ac").siblings().removeClass("ac");
+	 };
+	//自动控制轮播特效	
+	$('.btn_r').click(function(){
+		next();
+	});
+	function next(){	
+		iNow++;
+		if(iNow==aLi.length){
+		   iNow=0;	
+		}
+		tab();
+	}
+
+	$('.btn_l').click(function(){
+		iNow--;
+		if(iNow==-1){
+			iNow=aLi.length-1;
+		}
+		tab();
+	})
+		
+
+	timer=setInterval(next,2000);
+	$(".box").hover(function(){
+		clearInterval(timer);		
+		$('.btn').show();
+	},function(){	
+	  timer=setInterval(next,2000);
+	  $('.btn').hide();	
+	})
+})
+</script>
+
+</head>
+
+<body>
+<div class="box">
+	<ul class="tu">
+    	<li><a href="#"><img src="images/1.jpg"></a></li>
+        <li><a href="#"><img src="images/2.jpg"></a></li>
+        <li><a href="#"><img src="images/3.jpg"></a></li>
+        <li><a href="#"><img src="images/4.jpg"></a></li>
+        <li><a href="#"><img src="images/5.jpg"></a></li>
+    </ul>
+    
+    <ul class="shu">
+    	<li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+    </ul>
+
+	<div  class="btn btn_l">&lt;</div>
+	<div class="btn btn_r">&gt;</div>
+</div>
+
+</body>
+</html>

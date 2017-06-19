@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="author" content="JZH">
+    <title></title>
+    <script src="angular.js"></script>
+</head>
+<body ng-app="app" ng-controller="ctrl">
+    
+    <form name="form">
+        密码密码：<input type="text" name="password" ng-model="password"> <br><br>
+        确认密码：<input type="text" zy-equal-to="password" name="confirm" ng-model="confirm">
+        <span ng-show="form.confirm.$dirty && form.confirm.$error.zyEqualTo">请确保两次密码输入一致</span>
+        <p>
+            {{form.confirm.$dirty}} && zyEqualTo: {{form.confirm.$error.zyEqualTo}}
+        </p>
+    </form>
+
+</body>
+</html>
+<script>
+angular.module('app',[])
+.controller('ctrl',['$scope',function($scope){
+
+}])
+.directive('zyEqualTo',function(){
+    return{
+        restrict:'A',
+        // 根据指令查找控制器
+        // ngModel 在自身的元素上查找控制器
+        // require:'ngModel',
+        // ^^form: input 的父标签form
+        require:['ngModel','^^form'],
+        // ctrls: require 字段所对应的 控制器
+        // ctrls 的取值可能是数组，也能是一个 controller 对象
+        // 取决于 reauire 后面是一个数组还是一个字符串
+        link:function($scope,ele,attrs,ctrls){
+            // $viewVlaue:视图上的值 $modelValue:模型中的值
+            console.log(attrs.zyEqualTo)
+            console.log(ctrls);
+            
+            // 获取指令所在标签对应的 controller
+            var conformCtrl = ctrls[0];
+            var formCtrl = ctrls[1];
+            var passwordCtrl = formCtrl[attrs.zyEqualTo];
+            console.log(passwordCtrl)
+
+            // $validators： (是一个对象)用来存放验证规则对应的函数
+            // $viewValue: 视图上的值
+            // $modelValue: 模型中的值
+            // 他们都是 controller 的属性==
+            // 我们的验证函数的功能： 密码 == 确认密码 true/false
+            // 定义验证规则函数，函数名使用驼峰命名法
+            // 参数1：模型中的值；参数2：视图中的值
+            conformCtrl.$validators.zyEqualTo = function(modelvalue,viewValue){
+                console.log('密码='+passwordCtrl.$viewValue);
+                console.log('确认密码='+viewValue);
+                console.log(passwordCtrl.$viewValue == viewValue)
+                // 密码 和 确认密码 相比，如果一致返回true，否则返回 false
+                return passwordCtrl.$viewValue == viewValue;
+            }
+
+            // 当输入框的值变化时，angular 内部会自动调用这些验证函数
+
+            // 如果密码发生变化，也要调用 zyEqualTo 验证函数，可添加监听
+            
+            // $watch 是 $scope 对象的函数，用来监听数据的变化
+            // console.log($scope);
+            // 参数1：监听的对象 (angular 表达式) ; password
+            // 参数2：当监听的对象的值发生变化时执行的回调函数
+            // 回调函数有三个参数：newValue新值；oldValue旧值；$scope对作用域的引用
+            $scope.$watch(attrs.zyEqualTo,function(newValue,oldValue,$scope){
+
+                // $validate() 执行这个方法，内部会执行所有的验证函数
+                conformCtrl.$validate();
+            })
+
+
+        }
+    }
+})
+
+</script>

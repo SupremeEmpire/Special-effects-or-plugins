@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="JZH">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="angular.js"></script>
+    <script src="angular-ui-router.js"></script>
+    <title></title>
+<style>
+     nav{
+       width: 100%;
+       height: 44px;
+       box-shadow:0 0 1px #999;
+       position: fixed;
+       bottom: 0;
+       left: 0;
+       display:flex;
+       justify-content: space-around;
+   }    
+   a{
+     flex-grow: 1;
+     text-align: center;
+     line-height: 44px;
+   }
+   a:focus{
+     background-color: lightskyblue;
+   }  
+</style>    
+</head>
+<body ng-app="app">
+  <nav>
+      <a ui-sref="home">首页</a>
+      <a ui-sref="friends">好友</a>
+      <a ui-sref="settings">设置</a>
+  </nav> 
+<!--
+  一个状态可以对应多个视图,为了区分视图,就需要给视图器不同的名字  
+-->
+  <div ui-view></div>
+  <div ui-view="view2"></div>
+</body>
+<html>
+<script>
+angular.module('app',['ui.router'])
+.config(['$stateProvider','$urlRouterProvider',
+function($stateProvider,$urlRouterProvider){
+ $urlRouterProvider.when('','/home')
+ $stateProvider
+ .state('home',{
+   url:'/home',
+ //当该状态下有多个ui-view时,需要用到views  
+ //针对不同的ui-view 使用不同的 template 和 controller   
+   views:{
+    //当一个页面上带有多个 ui-view的时候,根据ui-view的命名加载对应的视图模板  
+     '':{//没有名字的view
+        template:'<h2>首页中view1容器的内容</h2>',
+        //controller:'....'
+     },
+    'view2':{//名字为view2的view
+       template:'<h2>首页中view2容器对应的内容</h2>'
+     }
+   }
+ })
+ .state('friends',{
+   url:'/friends',
+   views:{
+     '':{
+       template:'<h2>好友页面view1</h2>'
+     }
+   }
+ })
+ .state('settings',{
+   url:'/settings',
+   views:{
+     '':{
+       template:'<h2>设置页面的view1</h2>'
+     }
+   }
+ })
+}])        
+</script>

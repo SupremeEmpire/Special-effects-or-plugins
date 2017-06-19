@@ -1,0 +1,18 @@
+/*
+ 根据表单的状态类添加样式
+*/
+/*
+  具有ng-valid类名同时具有required属性
+  或者 有 ng-valid、required 两个样式类的标签
+*/
+.ng-valid[required],
+.ng-valid.required{
+    border-left: 5px solid #3a6;
+}
+
+/*
+ 具有ng-invalid 类名 但 form标签除外
+*/
+.ng-invalid:not(form){
+    border-left: 5px solid lightskyblue;
+}

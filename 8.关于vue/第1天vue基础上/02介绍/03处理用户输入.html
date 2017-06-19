@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>处理用户输入</title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="author" content="尹学江">
+  <script src="../vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <span>{{ message }}</span>
+    <br>
+    <!-- 绑定方法时 （没有参数） （）可以加也可以不加 -->
+    <button v-on:click="reverseMessage">把message倒过来</button>
+    <br>
+    <button v-on:click="reverse('message')">把message倒过来</button>
+    <br>
+    <span>{{ msg }}</span>
+    <br>
+    <button v-on:click="reverse('msg')">把msg倒过来</button>
+  </div>
+</body>
+<script type="text/javascript">
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!',
+    msg:"hello world"
+  },
+  // 方法的对象
+  methods: {
+    reverseMessage: function() {
+      // 在对象内获取数据时，使用this+数据变量名
+      this.message = this.message.split("").reverse().join('');
+    },
+    reverse(text) {
+    	console.log(text)
+      this[text] = this[text].split("").reverse().join('');
+    }
+
+  }
+})
+</script>
+
+</html>

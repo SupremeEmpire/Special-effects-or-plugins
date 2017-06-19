@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Vue</title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="author" content="尹学江">
+  <script src="vue.js"></script>
+  <style type="text/css">
+  	.card{
+  		border: 1px solid #ccc;
+  		float: left;
+  		margin-right: 30px;
+  		padding: 20px;
+  	}
+  </style>
+</head>
+
+<body>
+<!-- 父组件 可以理解为 vue实例，他也是一个组件 -->
+  <div id="app">
+    <!-- 使用组件 -->
+    <!-- <card :person="person1" text="这是一个文本"></card>
+    <card :person="person2"></card> -->
+    <!-- card组件是app组件一个子组件 -->
+    <card :person="person1" text="这是一个文本"></card>
+
+
+    <!-- 另一组件 -->
+    <counter num="10"></counter>
+    <counter num="100"></counter>
+    <counter num="1000"></counter>
+  </div>
+</body>
+<script type="text/html" id="card">
+<div class="card">
+<!-- counter是card子组件 -->
+	<counter num="1000"></counter>
+	<h2>{{text}}</h2>
+	<div>姓名：{{person.name}}</div>
+	<div>年龄：{{person.age}}</div>
+	<div>公司：{{person.company}}</div>
+	<div>职位：{{person.job}}</div>
+</div>
+</script>
+<script type="text/javascript">
+// 名片组件
+// 1. 使用props 传递数据（父往子传）
+// 在vue中，不能直接使用父组件中的数据
+// 因为 vue组件作用域是孤立（不能访问外部的数据）
+// 保留使用外部数据功能(通过props 往子组件传值)
+Vue.component('card', {
+  template: '#card',
+  // 指定 对应的属性来传值
+  // 可以传多个属性
+  props:['person','text'],
+  data: function() {
+    return {
+      message: "hello world!",
+      // 属性传值的数据，在数据不能在重复声明
+      // person:{}
+    }
+  }
+})
+
+// prop是单向绑定的：当父组件（属性）数据发生变化，将数据传导子组件，但是不会返过来，这是为了防止 子组件无意修改了父组件的数据
+// 这样做的目的，使数据流更好理解
+Vue.component('counter',{
+	template:"<button @click='counter++'>{{counter}}</button>",
+	// 传过的值，也可以在数据中直接使用
+	props:['num'],
+	data:function(){
+		return {
+			counter:this.num
+		}
+	}
+})
+// vue 实例
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!',
+    person1:{
+    	name:"尹学江",
+    	age:100,
+    	company:"智游",
+    	job:"讲师"
+    },
+    person2:{
+    	name:"邵建成",
+    	age:20,
+    	company:"待定",
+    	job:"前端开发工程师"
+    }
+  }
+})
+</script>
+
+</html>

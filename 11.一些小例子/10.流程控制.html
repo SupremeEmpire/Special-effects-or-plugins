@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!--流程控制
+    分支控制if..else  switch ..case
+    循环控制 for for-in  while   do....while
+    
+    容器,ifelse 放入数据之前判断是否含有这样的数据,
+    如果含有,抛弃,如果不含有,放入
+    while(判定容器的个数是否....)
+    1.获取随机值
+    2.if(如果容器中含有这个随机值){
+        则....
+        }
+        else{
+            否则....}
+    //if后跟条件,如果条件成立,则执行if后{}内的代码
+    //否则执行else后面的代码
+    //()内放的是判断的条件
+    //{}内放置的是代码块
+    //ifelse嵌套
+    -->
+    
+</body>
+</html>
+<script>    
+    a=50;
+    if (a>34) {
+        console.log("a比较大")
+    } else {
+        //表示其余情况
+        console.log("ddd")
+        if (a==34) {
+            console.log("====")
+        }else{
+            console.log('<<<<<<<<<<0')
+        }
+    }
+    //if else 
+    //else 连接多个if语句,判定时,从第一个条件开始判定
+    //如果为真,执行其后{}内的代码块,然后结束这个语句
+    // 如果为假,继续判定下一个条件
+    // 如果条件不成立,则执行else后{}内的内容
+    a =50;
+    if(a>34){
+        console.log(">>>")
+    }
+    else if(a<34){
+        console.log("======")
+    }
+    else{
+        console.log("<<<<<")
+    }
+
+    //= 赋值
+    // ==判断是否相等,(值相等)
+    // ===判断是否相等(类型和值都相等)
+    var weekday = 3;
+    //匹配  效率较高
+    switch (weekday) {
+        case 1:
+                console.log("aaaaa")
+                //中断语句
+            break;
+        case 2:
+                console.log("bbbbbbb")
+            break;
+        case 3:
+                console.log("cccccccccc")
+            break;
+        
+        default://以上匹配都不匹配时执行
+            console.log("dddddddddd")
+    }
+
+</script>
+<script>
+    // for 
+    //第一个语句 声明变量i(表示的索引)
+    //索引index  序号 次数 
+    //第二个语句:使用索引做了个条件
+    //第三个语句:是索引变量的值改变
+    //先判定条件是否成立,执行{}内的代码块
+    //执行完毕,使索引值变化,再次判定条件是否成立...
+    //直到条件不成立,则结束语句
+    for (var i = 0; i <0; i++) {
+        console.log(i);
+        
+    }
+    for(var i=0;i<=100;i++){
+        console.log(i);
+    }
+    for(var i=0;i<=100;i++){
+        console.log(i++)
+    }
+    
+    for(var i=0;i<50;i++){
+        console.log(i*2)
+    }
+    console.log("-------",i);
+    
+    // for(var a=0;a<101;a++){
+    //     if(a%2 == 0){
+    //         console.log(a);
+    //     }
+    // }
+
+</script>

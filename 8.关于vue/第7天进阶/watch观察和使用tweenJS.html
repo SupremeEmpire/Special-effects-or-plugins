@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="author" content="李泽举">
+    <title></title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="../js/Tween.js"></script>
+</head>
+    
+<body>
+    <div id="app">
+        <input type="number" v-model.number="number" step="100"><br>
+        <span>{{animatedNumber}}</span>
+    </div>
+</body>
+    
+</html>
+    
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            message:'hello vue!',
+            number:1000,
+            animatedNumber:0,
+        },
+        //  观察
+        // 观察可以指定观察的属性,一旦发生变化则调用这个函数
+        // 观察数据 所对应的函数, 并且这个函数两个参数,会接收一个新值(将要变化的值),一个老值(原有的值)
+        watch:{
+            number:function(newValue,oldValue){
+                // 使用vm代表this
+                var vm = this;
+
+                // 下面就是帮助我们完成平滑动画
+                function animate(time){
+                    requestAnimationFrame(animate);
+                    TWEEN.update(time)
+                }
+                new TWEEN.Tween({
+                    // oldValue 旧值
+                    tweeningNumber:oldValue
+                })
+                .easing(TWEEN.Easing.Quadratic.Out)
+                .to({
+                    // newValue 新值
+                    tweeningNumber:newValue
+                },1000)
+                .onUpdate(function(){
+                    // 使用另一个数据 来接收变化过程
+                    vm.animatedNumber=this.tweeningNumber.toFixed(0)
+                })
+                .start()
+
+                animate()
+                // console.log(newValue)
+                // console.log(oldValue)
+            }
+        }
+    })
+    
+</script>

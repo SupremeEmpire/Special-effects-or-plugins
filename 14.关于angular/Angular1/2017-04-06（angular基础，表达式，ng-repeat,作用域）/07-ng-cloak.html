@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="JZH">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="angular.js"></script>
+    <title>07-ng-cloak</title>
+    <style>
+        
+    </style>
+</head>
+<!--
+  angular 的启动需要时间,在angular 启动之前页面会短暂的显示{{}}
+  ng-cloak 隐藏所在标签,避免{{}}闪现
+  如果想观察闪现的效果,在ng-clock之前导入angular.js  
+  其实,在head标签中添加css样式,所有存在ng-cloak的标签
+  均有:display:none !important;
+-->
+<body ng-app="app" ng-controller="ctrl" ng-cloak>
+  姓名:{{username}}
+  <!--<script src="http://www.baidu.com"></script>  -->
+</body>
+<html>
+<script>
+angular.module('app',[])
+.controller('ctrl',['$scope',function($scope){
+    $scope.username = 'tom';
+}])        
+</script>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Vue</title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="author" content="尹学江">
+  <script src="../vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+  <!-- 第1种 插入内容-->
+    <span>{{ message }}</span>
+    <!-- 第2种 插入属性-->
+    <p v-bind:id="myId">我是有id的段落</p>
+    <!-- 第3种 插入html -->
+    <div v-html="h1"></div>
+     <!-- 第4种 插入内容不能改变 -->
+     <div v-once>这里是内容:{{msg}}</div>
+  </div>
+</body>
+<script type="text/javascript">
+var app = new Vue({
+  el: '#app',
+  data: {
+  	message: '<p>Hello Vue!</p>',
+    myId:'pbox',
+    h1:"<h1>我是一级标题</h1>",
+    msg:"这里是msg"
+  }
+})
+
+app.message = "message我被改变了"
+app.msg = "我被改变了"
+</script>
+
+</html>

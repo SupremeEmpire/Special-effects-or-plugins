@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="JZH">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>01-angular基础</title>
+    <script src="./angular.js"></script>
+</head>
+<!--
+   ng-app 指令定义一个AngularJS 应用程序 
+   ng-init 指令初始化 AngularJS 应用程序变量
+-->
+<body ng-app="" ng-init="a=1;b=2">
+ <!--
+  AngularJS是一个js框架,通过指令扩展了html，且通过'表达式'绑定数据到html
+  AngularJS指令是以 ng 作为前缀的html属性
+  AngularJS表达式写在双花括号内:{{表达式}}
+-->
+  a + b = {{a+b}}       
+  <p>
+    hello {{'angular'+'1.x'}}  
+  </p>
+  <!--
+    ng-model 双向数据绑定  
+  -->
+  <input type="number" ng-model="a"> + 
+  <input type="number" ng-model="b"> =
+  {{a+b}}
+  <!--
+    AngularJS 的特点:
+    1、实现了对html的扩展;
+    2、页面就是模版;
+    3、数据的双向绑定:数据与页面的绑定:数据变化 <-> 页面变化
+  -->
+</body>
+<html>
+<script>
+      
+</script>
+<!--AngularJS实现了对html的扩展,目标使用来开发web-app,采用声明式的模版
+支持数据双向绑定,
+支持MVW、MVVM、MVC架构模式,
+依赖注入并且提供了大量的已经实现的纯粹浏览器端的稳定的测试用例
+
+-->

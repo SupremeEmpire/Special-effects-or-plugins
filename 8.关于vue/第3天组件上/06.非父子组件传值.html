@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Vue</title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="author" content="尹学江">
+  <script src="vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 使用组件 -->
+    <com1></com1>
+    <com2></com2>
+  </div>
+</body>
+<script type="text/html" id="com1">
+  <div>
+    <div>message</div>
+    <button @click="btnClick">按钮</button>
+    <br>
+    <br>
+    <br>
+    <br>
+  </div>
+</script>
+<script type="text/javascript">
+// 创建一个vue 作为中央总线来处理  非父子关系组件事件传播
+var bus = new Vue();
+
+// 创建组件
+Vue.component('com1', {
+  template: '#com1',
+  data: function() {
+    return {
+      message: "您好，世界"
+    }
+  },
+  methods: {
+    btnClick() {
+      // 通过总线，来发送事件 传递数据
+      bus.$emit("giveMsg", this.message)
+    }
+  }
+})
+
+// 创建组件2
+Vue.component('com2', {
+    template: '<div>{{message}}</div>',
+    data: function() {
+      return {
+        message: "hello world!"
+      }
+    },
+    // 当组件创建完成时会执行这个函数
+    created: function() {
+      let that = this;
+      // this.init();
+      bus.$on('giveMsg', function(value) {
+        console.log('1111')
+        console.log(value)
+        that.message = value;
+      })
+    },
+    methods: {
+      init() {
+        alert("组件挂载完成");
+      }
+    }
+  })
+  // vue 实例
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!'
+  }
+})
+</script>
+
+</html>

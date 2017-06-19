@@ -1,0 +1,53 @@
+一、钩子函数
+组件生命周期相关的函数
+
+生成周期函数属于
+参数对象属性
+和
+el，data,methods,filters,components 一个级别
+
+
+上面结论：组件需要上一个挂载完成(没有执行挂载函数) 才会创建第二个组件 -->   
+
+结论：所有都挂载完成之后，才把按顺序执行挂载完成函数 
+
+//创建完成之后
+created:function(){
+	获取数据
+	注意：$el还没有生成 
+}
+
+
+// 挂载完成之后
+mounted:function(){
+	包括
+	$el 当前组件dom元素
+	$refs也在这时生成
+}
+
+
+二、自定义组件注意事项
+1. Props 允许外部环境传递数据给组件
+属性传值props
+
+2. Events 允许组件触发外部环境的副作用
+组件的数据能不能回传出
+
+3. Slots 允许外部环境将额外的内容组合在组件中。
+通过插槽往子组件传html
+
+v-model比较好用
+
+
+三、实例slide
+1. Props
+width
+color
+value
+
+2.Events
+@input
+
+
+v-model
+

@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="page-header col-md-6 col-md-offset-3">
+        <h1 class="text-center">angular by</h1>
+    </div>
+    <div style="clear:both"></div>
+    <!--$event原生事件对象-->
+    <form name="form" novalidate ng-submit="commit($event);">
+        <div class="form-group well" ng-show="errorMessage">
+            {{errorMessage}}
+        </div>
+        <div class="form-group">
+            <label for="username">用户名</label>
+            <input type="text" class="form-control" id="username" placeholder="用户名" ng-model="username" name="username" required>
+        </div>
+        <div class="form-group">
+            <span ng-show="form.username.$dirty&&form.username.$error.required">用户名必须</span>
+        </div>
+        <div class="form-group">
+            <label for="password">密码</label>
+            <input type="password" class="form-control" id="password" placeholder="密码" ng-model="password" name="password" required>
+        </div>
+        <div class="form-group">
+            <span ng-show="form.password.$dirty&&form.password.$error.required">密码必须</span>
+        </div>
+        <button type="submit" class="btn btn-success btn-block" ng-disabled="form.$invalid">
+            <span class="glyphicon glyphicon-flash"></span>
+            提交
+        </button>
+    </form>
+</div>

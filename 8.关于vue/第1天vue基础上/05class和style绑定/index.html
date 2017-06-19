@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Vue class和style</title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="author" content="尹学江">
+  <script src="../vue.js"></script>
+  <style type="text/css">
+  	.red{
+  		color: red;
+  	}
+  	.green{
+  		color: green;
+  	}
+  	.fz20{
+  		font-size: 20px;
+  	}
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 对象方法 -->
+    <div :class="classObject">对象方法绑定class</div>
+    <div :class="{'red':true,'green':false}">对象方法绑定class</div>
+    <!-- 数组方法 -->
+    <div :class="classArr">数组方法绑定class</div>
+    <button @click="toggleColor">切换字体颜色</button>
+    <!-- style -->
+    <!-- 对象方式 -->
+    <div :style="styleObject">对象方法绑定style</div>
+    <div :style="[styleObject,styleObject2]">对象方法绑定style</div>
+  </div>
+</body>
+<script type="text/javascript">
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!',
+    classObject:{
+    	// 键名 是class类
+    	// 键值 是否显示 class类
+    	"red":true,
+    	"green":false
+    },
+    color:'red',
+    classArr:['green','green',"fz20",'red'],
+    styleObject:{
+      color:"red",
+      fontSize:"30px",
+      marginTop:"30px",
+    },
+    styleObject2:{
+      backgroundColor:"black",
+      padding:"50px"
+    }
+  },
+  methods:{
+  	toggleColor(){
+  		let arr = [];
+  		this.classArr.forEach( function(element, index) {
+  			if(element != 'green' && element!='red'){
+  				arr.push(element);
+  			}
+  		});
+  		this.color = this.color =='red'? 'green':'red'
+  		arr.push(this.color)
+  		this.classArr = arr;	
+  	}
+
+  }
+})
+
+app.classObject.red = false;
+app.classObject.green = true;
+</script>
+
+</html>

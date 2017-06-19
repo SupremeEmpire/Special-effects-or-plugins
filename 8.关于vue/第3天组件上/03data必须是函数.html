@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Vue</title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="author" content="尹学江">
+  <script src="vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 使用组件 -->
+    <simple-counter></simple-counter>
+    <simple-counter></simple-counter>
+  </div>
+</body>
+<!-- 组件模板 -->
+<script type="text/html" id="simple-counter">
+  <div>
+  数字为：{{counter}}<br>
+  <button @click="counter++">增加</button>
+  </div>
+</script>
+<script type="text/javascript">
+
+// 注册组件
+Vue.component('simple-counter', {
+  template: '#simple-counter',
+  // 目的:就是每产生一个组件就对应一个数据，而不是共用一个数据
+  data: function() {
+  	// 返回一个数据对象
+    return {
+			counter:0
+		}
+  }
+});
+// vue 实例
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!'
+  }
+})
+</script>
+
+</html>

@@ -1,0 +1,70 @@
+@charset "utf-8";
+/* 导航 */
+/*body{overflow:-Scroll;overflow:hidden}*/
+#app{
+    position: absolute;bottom: 0;top: 0;width: 100%;overflow:hidden;
+}
+main{
+    padding: 10px;
+    padding-bottom: 44px;
+    height: 100%;
+    color: white;
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+}
+/* 过渡动画 */
+.slide-enter-active{
+    transition: all 0.4s;
+    transform: translateX(0%)
+}
+.slide-enter{
+    transform: translateX(100%)
+}
+.slide-leave-active{
+    transition: all 0.4s;
+    transform: translateX(-100%)
+}
+.slide-leave{
+    transform: translateX(0%)
+}
+
+
+.home{
+    background-color: red;
+}
+.info{
+    background-color: green;
+}
+.user{
+    background-color: blue;
+}
+.car{
+    background-color: yellow;
+}
+footer{
+    position: fixed;width: 100%;height: 44px;bottom: 0;background-color: white;z-index: 1000;border-top: 1px solid #ccc;
+}
+footer ul li{
+    float: left;height: 44px;line-height: 44px;width: 25%;text-align: center;
+}
+/*footer ul{position: relative;}
+footer ul li::before{
+    height: 100px;
+            content: "";
+            position: absolute;
+            left: 215px;
+            top: 49px;
+            background: black;
+            width: 100px;
+}*/
+footer ul li a{
+    color: black;
+    height: 44px;line-height: 44px;
+    display: block;
+}
+footer ul li .router-link-active{
+    color: red;
+    text-decoration: underline;
+    border: 1px solid black;
+}

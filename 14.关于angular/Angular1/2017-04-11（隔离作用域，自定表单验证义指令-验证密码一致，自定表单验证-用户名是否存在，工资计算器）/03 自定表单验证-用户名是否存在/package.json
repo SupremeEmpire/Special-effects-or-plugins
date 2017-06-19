@@ -1,0 +1,14 @@
+{
+  "name": "angular",
+  "version": "1.0.0",
+  "description": "表单验证",
+  "main": "app.js",
+  "scripts": {
+    "test": "1"
+  },
+  "author": "jxz",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.2"
+  }
+}

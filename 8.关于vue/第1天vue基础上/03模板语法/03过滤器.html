@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Vue</title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="author" content="尹学江">
+  <script src="../vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <span>{{ message | capitalize(true)}}</span>
+  </div>
+</body>
+<script type="text/javascript">
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'this is an orange'
+  },
+  filters:{
+  	// 首字母大写
+  	capitalize:function(text,all){
+  		// text
+  		console.log(text)
+  		if(all){
+  			return text.replace(/\b\w/g,function(a){
+  				return a.toUpperCase();
+  			})
+  		}else{  			
+  		  return text[0].toUpperCase() + text.slice(1);
+  		}
+  		
+  	}
+  }
+})
+</script>
+
+</html>

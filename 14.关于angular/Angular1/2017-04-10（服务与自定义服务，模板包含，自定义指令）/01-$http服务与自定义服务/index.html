@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="JZH">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="angular.js"></script>
+    <title></title>
+<style>
+   table{
+     border-collapse:collapse;
+   } 
+   td,th{
+     border: 1px solid lightskyblue;
+     padding: 10px;
+     text-align: center;
+   }
+
+</style>
+</head>
+<body ng-app="app" ng-controller="ctrl" ng-init="">
+  <h1>足球比赛日程表</h1>  
+  <p>
+     全局搜索: <input type="text" ng-change="resetFilter()" ng-model="global">
+     比赛轮次: <select ng-change="resetFilter()" ng-model="round" ng-options="v for v in roundArray">
+                    <option value="">选择比赛轮次</option>
+                    <option value="">{{v}}</option>       
+               </select>
+     比赛日期: <select ng-change="resetFilter()" ng-model="date" ng-options="v for v in dateArray">
+              <option value="">选择比赛日期</option>
+              <option value="">v</option>  
+              </select>
+  </p>
+  <table>
+      <thead>
+          <th>场次</th>
+          <th>轮次</th>
+          <th>商标</th>
+          <th>主队</th>
+          <th>客队</th>
+          <th>城市</th>
+          <th>比赛场地</th>
+          <th>比赛日期</th>
+      </thead>
+      <tbody>
+          <tr ng-repeat="ball in footballData | filter:query">
+            <td>{{$index+1}}</td>
+            <!--<td>{{ball['Round']}}</td>
+            <td>{{ball['Team1']}}</td>-->
+            <td ng-repeat="key in keys">
+              <!--{{ball[key]}}-->
+              <!--如果key==Flag1 展示Img,否则展示span-->
+              <span ng-if="key != 'Flag1'">{{ball[key]}}</span>
+              <img ng-if="key == 'Flag1'" src="{{ball[key]}}">
+            </td>
+          </tr>
+      </tbody>
+  </table>
+</body>
+<html>
+<script>
+angular.module('app',[])
+/*
+注入angular 提供的内置服务 $http 
+$http:angular 内置的一项服务用来,实现客户端与服务端的交互
+常用的方法:
+1.$http.get(url,{}).then(successCallBack,errorCallBack)
+ 1). url: 请求的路径
+ 2). json对象:请求参数的配置,比如:{params:{username:'JZH'}}
+ 3). then(请求成功的回调函数,请求失败的回调函数)
+2. $http.post(url,data,config).then(successCallBack,errorCallBack)
+   1). url:请求的路径
+   2). data:请求内容
+   3). config:请求配置对象 
+3.$http.jsonp(url).then(successCallBack,errorCallBack)   
+*/
+//注入自定义服务 OperationArray 
+//依赖注入 
+.controller('ctrl',['$scope','$http','OperationArray',
+function($scope,$http,OperationArray){
+  console.log(OperationArray);
+  $scope.keys = ['Round','Flag1','Team1','Team2','MatchCity','Situation','date']
+  $http.get('data.json')
+  .then(function(res){
+    console.log(res);
+    $scope.footballData = res.data.data;
+    $scope.roundArray = OperationArray.uniqueArray($scope.footballData,'Round');
+    $scope.dateArray = OperationArray.uniqueArray($scope.footballData,'date');
+
+    // console.log(res.data);
+  },function(err){
+    console.log(err)
+  });
+//记录过滤规则 
+  $scope.query = {};
+  //当输入的内容变化时,重置过滤规则 
+  $scope.resetFilter = function(){
+     $scope.query = {};
+     if($scope.global){
+       $scope.query.$ = $scope.global;
+     }
+     if($scope.round){
+        $scope.query.Round = $scope.round;
+     }
+     if($scope.date){
+       $scope.query.date = $scope.date;
+     }
+    console.log($scope.query)
+    }
+}])  
+// service() 自定义服务 处理场次时间
+//参数1:服务的名称
+//参数2:服务的定义函数(服务具体的功能)  
+.service('OperationArray',function(){
+   this.uniqueArray = function(array,key){
+    console.dir(array);
+    var roundArray= [];
+    for(var i = 0;i < array.length;i++){
+      console.dir(array)
+      //   var ball = array[i];
+      //   var round = ball[key];
+      //   roundArray.push(round);
+      //  }
+      //  console.log(round);
+      //从原始数组得到一个新数组
+      // map:映射:让原数组中每一个元参与运算,返回运算结果,形成一个新数组
+      //item:数据中的元素;index:元素对应的索引;arr:原数组
+     var newArray = array.map(function(item,index,arr){
+        return item[key];
+    });
+      // console.dir(newArray);
+      // return newArray;
+      //数组去重 
+      var set = new Set(newArray);
+      var arr = Array.from(set)
+      console.dir(arr);
+      return arr;
+    }
+   }
+})      
+</script>
+<script>
+//   var p = {
+//     name:'Tom',
+//     age:22
+//   }
+//   console.log(p.name)
+//  var key = 'name'
+//   console.log(p[key])
+  // section.style.width
+  // section.style['width']
+
+//ES6 提供了一种新的数据结构 Set,类似于数组,但是Set的成员的值都是唯一的
+//Set函数接收一个数组(或者类似于数组的结构)作为参数,用来初始化  
+var arr = [1,1,2,3,4,4,5];                                                                                          
+var set = new Set(arr);
+console.log(set);
+
+//ES6 对数组扩展的方法: Array.from 将类似于数组的对象转化为真正的数组 
+var arr2 = Array.from(set);
+console.log(arr2)
+</script>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Vue 作用域插槽</title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="author" content="尹学江">
+  <script src="vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 使用组件 -->
+    <my-component>
+    	<!-- 插槽内容 -->
+    	<!-- 怎么获取到message -->
+    	<!-- scope(作用域) -->
+    	<!-- props(自定义的) 子组件中对应插槽传上来的所有属性 -->
+    	<template slot="item" scope="props">
+    		{{props.message + "这有意思吗？"}}
+    		<br>
+    		{{props.title}}
+    	</template>
+    </my-component>
+  </div>
+</body>
+<script type="text/html" id="my-component">
+<div>
+	<slot name="item" :message="message" title="这是标题"></slot>
+</div>
+</script>
+<script type="text/javascript">
+// 创建组件
+Vue.component('my-component', {
+  template: '#my-component',
+  data: function() {
+    return {
+      message: "hello world!"
+    }
+  }
+})
+// vue 实例
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!'
+  }
+})
+</script>
+
+</html>

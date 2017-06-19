@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="author" content="李泽举">
+    <title></title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <style>
+        .bounce-box {
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+            background-color: red;
+        }
+
+        .bounce-enter-active {
+            /* 进入的动画 */
+            animation: bounce-in 0.6s ease-in;
+        }
+
+        .bounce-leave-active {
+            /* 离开的动画 */
+            animation: bounce-out 0.6s ease-out;
+        }
+
+        @keyframes bounce-in {
+            0% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes bounce-out {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <span>{{message}}</span>
+        <button @click="seen=!seen">切换按钮</button>
+        <!-- 动画放到transition内部 -->
+        <transition name="bounce">
+            <div v-if="seen" class="bounce-box">
+                我是内容
+            </div>
+        </transition>
+    </div>
+</body>
+
+</html>
+
+<script>
+    var app = new Vue({
+        el: "#app",
+        data: {
+            message: "hello vue!",
+            seen: true
+        }
+    })
+
+</script>

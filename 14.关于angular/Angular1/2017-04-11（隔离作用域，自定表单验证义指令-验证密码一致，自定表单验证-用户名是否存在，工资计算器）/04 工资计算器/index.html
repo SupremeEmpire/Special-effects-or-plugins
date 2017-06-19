@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="author" content="JZH">
+    <title></title>
+    <script src="angular.js"></script>
+    <link rel="stylesheet" href="./index.css">
+</head>
+<body ng-app="app" ng-init="title='工资计算器';index=1" ng-cloak="">
+    <header>{{title}}</header>
+    <!--计算页面-->
+    <section class="page" ng-show="index == 1" ng-controller="calcCtrl">
+        <form class="form" name="form" novalidate>
+            <div class="form-group">
+                <input type="number" name="gongzi" ng-model="gongzi" min="1600" required placeholder="工资">
+                <span ng-show="form.gongzi.$dirty && form.gongzi.$error.min">基本工资不能低于￥1600</span>
+            </div>
+            <div class="form-group">
+                <input type="number" name="jixiao" ng-model="jixiao" min="0" required placeholder="绩效">
+                <span ng-show="form.jixiao.$dirty && form.jixiao.$error.min">绩效不能为负</span>
+            </div>
+            <div class="form-group">
+                <input type="number" name="jiangjin" ng-model="jiangjin" min="0" required placeholder="奖金">
+                <span ng-show="form.jiangjin.$dirty && form.jiangjin.$error.min">奖金不能为负</span>
+            </div> 
+            <div class="form-group">
+                <input type="button" ng-click="calc()" value="计算" ng-disabled="form.$invalid">
+            </div>
+        </form>
+        <ul ng-show="show">
+            <!--<li>...</li>-->
+            <li>税前收入：{{result.incomeBeforeTax | currency:'￥'}}</li>
+            <li>税税税税：{{result.tax | currency:'￥'}}</li>
+            <li>税后收入：{{result.incomeAfterTax | currency:'￥'}}</li>
+        </ul>
+    </section>
+    <!--设置页面-->
+    <section class="page" ng-show="index == 2" ng-controller="setCtrl">
+        <form name="form">
+            <ul>
+                <li>养老费率：<input type="number" ng-change="resetRate()" name="yanglao" ng-model="shebao.yanglao"> %</li>
+                <li>医疗费率：<input type="number" ng-change="resetRate()" name="yiliao" ng-model="shebao.yiliao"> %</li>
+                <li>失业费率：<input type="number" ng-change="resetRate()" name="shiye" ng-model="shebao.shiye"> %</li>
+                <li>工伤费率：<input type="number" ng-change="resetRate()" name="gongshang" ng-model="shebao.gongshang"> %</li>
+                <li>生育费率：<input type="number" ng-change="resetRate()" name="shengyu" ng-model="shebao.shengyu"> %</li>
+                <li>公积金率：<input type="number" ng-change="resetRate()" name="gongjijin" ng-model="shebao.gongjijin"> %</li>
+            </ul>
+        </form>
+    </section>
+    <section class="page" ng-show="index == 3">
+        <h1>欢迎使用工资计算器</h1>
+    </section>
+
+    <footer>
+        <ul>
+            <li ng-class="index==1 ? 'active' : ''" ng-click="title='工资计算器';index=1">计算</li>
+            <li ng-class="index==2 ? 'active' : ''" ng-click="title='设置';index=2">设置</li>
+            <li ng-class="index==3 ? 'active' : ''" ng-click="title='关于';index=3">关于</li>
+        </ul>
+    </footer>
+    <!--
+        ng-class 用于给元素绑定一个 或者多个类名
+        ng-class 的取值是一个 表达式么，可以是字符串、对象、数组
+        1、如果是字符串，多个类名使用空格分开
+        2、如果是对象，需要使用键(key)值(value)对，
+           key就是想要添加的类名，value 是一个布尔值，当value为true时添加key为类名
+        3、如果是数组，数组可以由字符串或者对象组成，每个元素对应的值都被当作类名来使用
+    -->
+    <!--<p ng-class="'a b'">1</p>
+    <p ng-class="index==1 ? 'active' : ''">2</p>
+    <p ng-class="{aa:true,bb:false,cc:true}">3</p>
+    <p ng-class="['aaa','bbb',{ccc:true}]">4</p>-->
+
+</body>
+</html>
+<script>
+angular.module('app',[])
+//计算页面
+// 注入 计算的 服务
+.controller('calcCtrl',['$scope','calcService',function($scope,calcService){
+    $scope.calc = function(){
+        console.log($scope)
+        var gongzi = $scope.gongzi;
+        var jixiao = $scope.jixiao;
+        var jiangjin = $scope.jiangjin;
+        // 把 工资、绩效、奖金 传入，并接受计算的结果
+        $scope.result = calcService.getResult(gongzi,jixiao,jiangjin);
+        console.log($scope.result);
+        $scope.show = true;
+    }
+
+    // 接受广播(添加事件监听)
+    // 参数1：监听的事件名称
+    // 参数2：监听到广播执行的回调函数
+    // 回调函数中有有两个参数：ev:事件对象;data：传递的数据
+    $scope.$on('ratechange',function(ev,data){
+        // console.log(arguments);
+        // 如果利率变化时，正巧在展示结果，那就重新计算
+        if($scope.show){
+            $scope.calc();
+        }
+    })
+
+}])
+//设置页面
+.controller('setCtrl',['$scope','$rootScope','getShebao',function($scope,$rootScope,getShebao){
+    // 把五险一金的比例 通过 服务 添加到当前作用域中
+    $scope.shebao = getShebao.shebao;
+
+    $scope.resetRate = function(){
+        console.log('利率变化了');
+        // 当利率在 设置 页面变化时，需要通知 计算页面重新计算
+        // calcCtrl 和 setCtrl 两者 形成的 作用域 毫无关系
+        // 借助共同的父作用域 $rootScope 发通知
+
+        // 从根作用域发送广播， 方向 从父作用域 到 子作用域
+        // 广播：所有的 子作用域 都可以接收到
+        // 参数1: 事件名称
+        // 参数2：传递的数据，如果没有可以缺省
+        $rootScope.$broadcast('ratechange','你好，利率变化了');
+    }
+
+}])
+// 两个并列的 无关的 作用域 需要使用共同的数据 五险一金 的比例
+// 1、把共享的数据放在他们共同的作用域 对象上
+// 2、把共享的数据封装成一个服务，需要的时候注入服务
+.service('getShebao',function(){
+    this.shebao = {
+        yanglao:0.08,
+        yiliao:0.02,
+        shiye:0.005,
+        gongshang:0,
+        shengyu:0,
+        gongjijin:0.05
+    }
+})
+// 自定义服务封装计算
+// 注入 getShebao 服务
+.service('calcService',['getShebao',function(getShebao){
+    this.getResult = function(gongzi,jixiao,jiangjin){
+        // 总工资
+        var total = gongzi + jixiao + jiangjin;
+        // console.log(getShebao);
+        // 基准工资
+        var normIncome = total<7662 ? total : 7662;
+        // 五险一金比例
+        var totalRate = getShebao.shebao.yanglao + getShebao.shebao.yiliao + getShebao.shebao.shiye +
+                        getShebao.shebao.gongshang + getShebao.shebao.shengyu + getShebao.shebao.gongjijin
+        // 税前收入
+        var incomeBeforeTax = total - normIncome*totalRate;
+        // 计税工资
+        var incomeOfTax = incomeBeforeTax - 3500;
+        // 计算个税
+        var tax = 0;
+        if(incomeOfTax <= 0){
+            tax = 0;
+        }else if(incomeOfTax <= 1500){
+            tax = incomeOfTax*0.03;
+        }else if(incomeOfTax <= 4500){
+            tax = incomeOfTax*0.1 - 105;
+        }else{
+            tax = incomeOfTax*0.2 - 555;
+        }
+        // 税后收入
+        var incomeAfterTax = incomeBeforeTax - tax;
+        console.log('交税：'+tax);
+        // 把计算结果放入一个对象 返回出去
+        return {
+            incomeBeforeTax,
+            tax,
+            incomeAfterTax
+        }
+    }
+}])
+
+
+
+</script>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Vue 注册组件</title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="author" content="尹学江">
+  <script src="vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <span>{{ message }}</span>
+    <!-- 使用组件 -->
+    <my-component></my-component>
+    <!-- 使用全部组件 -->
+    <component></component>
+    <myComponent></myComponent>
+
+    <!-- 注意html 标签是不区分大小写的 -->
+  </div>
+</body>
+<script type="text/javascript">
+// 2. 定义全局组件
+Vue.component("component",{
+	template:"<p>这是一个全局组件</p>"
+})
+
+// 创建vue对象
+var app = new Vue({
+	// 指定模板
+  el: '#app',
+  data: {
+    message: 'Hello Vue!'
+  },
+  // 1. 注册一个局部组件
+  components:{
+  	// 组件名称
+  	myComponent:{
+  		// 组件内容
+  		// html模板
+  		template:"<h1>这是一个局部组件</h1>"
+  	}
+
+  }
+})
+</script>
+
+</html>

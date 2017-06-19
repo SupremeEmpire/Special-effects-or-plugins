@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Vue</title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="author" content="尹学江">
+  <script src="../vue.js"></script>
+  <style type="text/css">
+  	table{
+  		width: 800px;
+  		margin: 0 auto;
+  		margin-top: 40px;
+  		border-collapse: collapse;
+  	}
+  	table tr th,
+  	table tr td{
+  		border: 1px solid #ccc;
+  		line-height: 40px;
+  		text-align: center;
+  	}
+  </style>
+</head>
+
+<body>
+  <div id="app">
+  	<!-- 删除和插件这个标签-->
+  	<p v-if="seen">能不能看到我</p>
+  	<button v-on:click="seen=!seen">切换按钮</button>
+    <!-- 随机抽取5个 并显示列表 -->
+    <div><input type="number" placeholder="请填写抽取的人数">  <button>抽取</button></div>
+  	<table>
+  		<tr>
+  			<th>排序</th>
+  			<th>姓名</th>
+  			<th>性别</th>
+  			<th>年龄</th>
+  			<th>手机</th>
+  			<th>邮箱</th>
+  		</tr>
+  		<!-- 数组循环 -->
+  		<tr v-for="(student, index) in students">
+  			<td>{{index + 1}}</td>
+  			<td>{{student.name}}</td>
+  			<td>{{student.sex}}</td>
+  			<td>{{student.age}}</td>
+  			<td>{{student.phone}}</td>
+  			<td>{{student.email}}</td>
+  		</tr>
+  	</table>
+  </div>
+</body>
+<script src="students.js"></script>
+<script type="text/javascript">
+// vue 实例
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!',
+    seen:true,
+    students:studentsData
+  }
+})
+</script>
+
+</html>

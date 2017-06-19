@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>过渡详解</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            border: 1px solid red;
+            /*复合样式*/
+            /*transition: width 2s linear 3s;*/
+
+            /*单一样式写法*/
+            /*设置过渡的属性,多个属性空格隔开*/
+            transition-property: width height;
+            /*设置过渡的时间*/
+            transition-duration: 3s;
+            /*设置过渡的时间函数*/
+            transition-timing-function: cubic-bezier(.38,-0.68,.61,1.46);
+            /*设置过渡延时*/
+            transition-delay: 3s;
+        }
+        div:hover{
+            width: 400px;
+            height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+</body>
+</html>

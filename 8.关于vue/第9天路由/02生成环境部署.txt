@@ -1,0 +1,15 @@
+ 一 安装webpack环境
+ npm install webpack -g
+ 二 安装vue-cli
+ npm install vue-cli -g
+ 三 找个项目文件夹
+ 命令:vue init webpack
+ 四 装依赖模块
+ npm i 安装所有依赖模块
+ 五 运行项目
+ 命令:npm run dev
+ 六 打包项目
+ 命令:npm run build
+
+ 打包成功之后再项目录下生成一个dist文件夹
+ dist的内容就是要放到服务器上的内容

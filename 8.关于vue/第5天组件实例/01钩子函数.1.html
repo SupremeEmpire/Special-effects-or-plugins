@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="author" content="JZH">
+    <title></title>
+    <script src="vue.js"></script>
+</head>
+<body>
+<div id="app">
+
+    <p>{{message.text}}</p>
+    <button @click="change">改变message.text</button>
+    <p>
+      number:{{number}}
+    </p>
+    <!--title不是响应式的属性，使用时不会渲染页面，
+    而且Vue给出错误提示：试图访问的title属性没有定义-->
+    <!--<p>标题：{{title}}</p>-->
+
+</div>
+</body>
+</html>
+<script>
+var message = {text:'hello vue!'}
+var app = new Vue({
+    el:'#app',
+    data:{
+           message,
+           number:10
+    },
+    methods:{
+        change(){
+            // this.number += 2;
+            this.message.text = '你好 vue!'+Math.random().toFixed(2);
+        }
+    },
+    // 监听属性值的变化
+    watch:{
+        // 格式  属性名:回调函数
+        // 当属性值发生变化时，执行回调函数
+        // number:function(){}
+        // 有两个参数可以使用：分别表示改变之后的值和改变之前的值
+        // number(newVal,oldVal){
+        //     console.log('number的值发生变化:'+newVal);
+        // }
+        // ['message.text'](newVal){
+        //     console.log('message变化：'+newVal);
+        // }
+
+},
+    // Vue实例的生命周期
+    created:function(){
+        // this.$el
+        console.log('vue实例创建好了');
+    },
+    mounted:function(){
+        console.log('vue实例被渲染到视图上');
+    },
+    updated:function(){
+        console.log('vue实例被更新了');
+    },
+    destroyed:function(){
+        console.log('vue实例被销毁了');
+    }
+});
+// 每个Vue实例都会代理其 data 对象里面的所有属性
+
+// 只有代理的属性是响应式的
+console.log(app.message.text);
+console.log(message.text);
+// 改变响应式属性的值,会重新渲染页面
+// 创建Vue时，添加到data里面的属性都是响应式的
+// setTimeout(function(){
+//     // message.text = '今天是0320';
+//     // app.message.text = '明天是0321';
+// },1000);
+
+// 如果Vue实例创建完成之后，再添加的属性不是响应式的，
+// 不会触发页面更新
+// app.title = '这是一个标题';
+
+console.log(app);
+
+// Vue暴露了一些有用的实例的属性和方法
+// 这些属性和方法都有一个前缀 $,以便于和代理的属性区分
+
+// vue实例的data属性
+console.log(app.$data);
+console.log(app.$data.message == app.message);//true
+
+// vue实例所关联的一个DOM元素
+console.log(app.$el);
+//true
+console.log(app.$el == document.getElementById('app'));
+
+// 监听属性值的变化
+app.$watch('message.text',function(newVal,oldVal){
+    console.log('message的值变化了:'+newVal);
+});
+
+
+</script>

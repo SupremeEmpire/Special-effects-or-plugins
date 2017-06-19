@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>左右移动选项</title>
+<link rel="stylesheet" href="css/orso.css" />
+<script type="text/javascript" src="js/jquery-1.11.3.min.js" ></script>
+<script type="text/javascript" src="js/orso.min.js" ></script>
+<script>
+	$(document).ready(function(){
+		$(".box").orso({
+			boxl:".box_l",//左边大盒子
+			boxr:".box_r",//右边大盒子
+			boxlrX:"li",//移动小盒子
+			boxon:"choose",//点击添加属性
+			idclass:true,//添加的属性是否为class//true=class; false=id;
+			boxlan:"#left",//单个向左移动按钮
+			boxran:"#right",//单个向右移动按钮
+			boxtan:"#top",//单个向上移动按钮
+			boxban:"#bottom",//单个向下移动按钮
+			boxalllan:"#allleft",//批量向左移动按钮
+			boxallran:"#allright",//批量向右移动按钮
+			boxalltan:"#alltop",//移动第一个按钮
+			boxallban:"#allbottom"//移动最后一个按钮
+		})
+	});
+</script>
+</head>
+<body>
+<div class="box">
+	<div class="box_l">
+		<li>测试选项移动1</li>
+		<li>测试选项移动2</li>
+		<li>测试选项移动3</li>
+		<li>测试选项移动4</li>
+		<li>测试选项移动5</li>
+		<li>测试选项移动6</li>
+		<li>测试选项移动7</li>
+		<li>测试选项移动8</li>
+		<li>测试选项移动9</li>
+		<li>测试选项移动10</li>
+		<li>测试选项移动11</li>
+	</div>
+	<div class="box_m">
+		<a href="javascript:" id="alltop">首个</a>
+		<a href="javascript:" id="top">向上</a>
+		<a href="javascript:" id="allleft">全部向左</a>
+		<a href="javascript:" id="left">单个向左</a>
+		<a href="javascript:" id="right">单个向右</a>
+		<a href="javascript:" id="allright">全部向右</a>
+		<a href="javascript:" id="bottom">向下</a>
+		<a href="javascript:" id="allbottom">最后</a>
+	</div>
+	<div class="box_r">
+		<li>测试选项移动12</li>
+		<li>测试选项移动13</li>
+		<li>测试选项移动14</li>
+		<li>测试选项移动15</li>
+		<li>测试选项移动16</li>
+		<li>测试选项移动17</li>
+		<li>测试选项移动18</li>
+		<li>测试选项移动19</li>
+		<li>测试选项移动20</li>
+		<li>测试选项移动21</li>
+		<li>测试选项移动22</li>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="author" content="金西振">
+    <title></title>
+    <script src="angular.js"></script>
+</head>
+<body ng-app="app" ng-controller="ctrl">
+    <!--
+        angular 过滤器用于转换数据
+        过滤器通过管道字符 | 和一个过滤器名添加到表达式中
+
+        uppercase 转换字符为大写
+        lowercase 转换字符为小写
+        currency  将数字转换为货币格式，默认是美元符号，
+                  可以在过滤器后面加上冒号，传入自己所需要的符号
+        number    给数字加上千分位，接受一个参数，表示保留几位小数
+        date      格式化日期：yyyy-MM-dd hh:mm:ss 表示：年-月-日 时:分:秒
+        orderBy   将数组中的元素进行排序，接受一个参数指定排序规则
+    -->
+    <p>姓名：{{name | uppercase}}</p>
+    <p>昵称：{{patname | lowercase}} </p>
+    <p>工资：{{money | currency:'￥'}} </p>
+    <p>数子：{{money | number:2}} </p>
+    <p>日期：{{date | date:'yyyy-MM-dd hh:mm:ss'}} </p>
+    <ul>
+        <li ng-repeat="stu in stus | orderBy:'age'">
+            姓名：{{stu.name}}，
+            年龄：{{stu.age}}
+        </li>
+    </ul>
+    <!--
+        fiter 用来处理一个数组，过滤出含有某个字符的元素，将这些元素
+        放入一个新数组返回
+        接受一个参数，用来定义元素的匹配规则
+    -->
+    筛选：<input type="text" ng-model="content">
+    <ul>
+        <li ng-repeat="color in colors | filter:content">
+            {{color}}
+        </li>
+    </ul>
+    <!--自定义过滤器-->
+    <p>{{book | wrap}} </p>
+    <!--参数传递时使用 : 分割-->
+    <p>{{book | wrap2: '【' : '】'}} </p>
+
+</body>
+</html>
+<script>
+angular.module('app',[])
+.controller('ctrl',['$scope',function($scope){
+    $scope.name = 'tom';
+    $scope.patname = 'littleTom';
+    $scope.money = 10000;
+    $scope.date = new Date();
+    $scope.stus = [
+        {name:'tom',age:22},
+        {name:'lily',age:26},
+        {name:'lucy',age:24}
+    ];
+    $scope.colors = ['red','blue','green','purple','yellow','orange'];
+    $scope.book = 'angular基础';
+
+}])
+// 定义一个过滤器
+// 参数1：过滤器的名称
+// 参数2：过滤器的定义函数
+.filter('wrap',function(){
+    // 返回一个过滤函数， data 原始参数
+    return function(data){
+        return '《' + data + '》';
+    }
+})
+// 符带有参数的过滤器
+.filter('wrap2',function(){
+    // data 后面是使用过滤器时传递的参数
+    return function(data,prefix,subfix){
+        return prefix + data + subfix;
+    }
+})
+</script>

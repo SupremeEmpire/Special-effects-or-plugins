@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>vue使用</title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="author" content="尹学江">
+  <!-- 使用vue.js 把vue.js引入进来 -->
+  <!-- 最新版本：2.3.3 -->
+  <script src="../vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <span>{{message}}</span>
+    <p>{{msg}}</p>
+  </div>
+</body>
+
+</html>
+<script type="text/javascript">
+// 模板绑定数据方法
+// 创建一个vue实例
+let app = new Vue({
+	// 通过el属性指定模板
+	el:"#app",
+	// 绑定数据
+	data:{
+		message:"hello Vue",
+		msg:"hello world"
+	}
+})
+
+// 临时改变数据方法
+setTimeout(function(){
+	app.message = "vue 我来了";
+},1000)
+
+
+
+</script>

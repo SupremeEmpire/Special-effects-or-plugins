@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    //基本数据类型 number string boolean null undefined 弱类型
+    var num =12;
+    var str ="12";
+    if (num ==str) {
+        console.log("==")
+    }
+    //类型是否相等
+    if (num === str) {
+        console.log("====")
+    }
+    // 其他类型转换为num类型
+    var str = "123";
+    str = "上课";
+    //将字符串str的值转换为数字类型的值
+    var  result = Number(str);
+    console.log(typeof result ,result);
+    //NaN not a number 不是一个数字
+    // ----其他类型转换为boolean类型
+    var num =0 ;
+    result = Boolean(num);
+    str= " ";
+    result = Boolean(str);
+    console.log(typeof  result,result);
+</script>
+<script>
+    //隐式的转换, + 运算符  拼接字符串的功能
+    // 当在加号运算中含有字符串的数据
+    //那么其他类型的数据都会被隐式的转换为字符串类型,然后进行字符串的拼接
+    var a= 10;
+    var b ="100";
+    var c  = true;
+    var result = b+a;
+    result= b+c;
+    console.log(result);
+    //当不含有字符串,那么就将boolean转换number
+    // 执行一个加法的运算
+    result = a+c;
+    console.log(result);
+    result =c+c;
+    console.log(result);
+    //当使用以上的运算符时,其他类型都要转换为number
+    //执行一个算数运算
+    result = a-b;
+    result =b -"20";
+    result = true - "20";
+    console.log(result);
+</script>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="author" content="李泽举">
+    <title></title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <span>{{message}}</span>
+        <com1></com1>
+        <com2></com2>
+    </div>
+</body>
+
+</html>
+
+<script>
+    // 定义一个被混合的对象
+    // 混合:复用
+    // 深混合:
+    var myMixin = Vue.extend({
+        template: "<h1>我是one</h1",
+        data: function () {
+            return {
+                msg: "hello world"
+            }
+        },
+        created() {
+            console.log("作者:5555")
+        }
+    })
+    Vue.component("com1", {
+        // 在组件中使用混合对象
+        // mixins 可以混入多个对象
+        mixins: [myMixin],
+        template: "<div>这是内容一</div>",
+        data: function () {
+            return {
+                author: "李泽举12"
+            }
+        },
+    })
+    Vue.component("com2", {
+        template: "<h1>这是内容二{{msg}}</h1>",
+        data: function () {
+            return {
+                author: "李泽举3"
+            }
+        },
+        created() {
+            console.log('作者:李泽举4')
+        }
+    })
+    var app = new Vue({
+        el: "#app",
+        data: {
+            message: 'hello vue!'
+        }
+    })
+
+</script>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="author" content="金西振">
+    <title></title>
+    <script src="angular.js"></script>
+</head>
+<body ng-app="app" ng-controller="ctrl">
+    <!--
+        angular 提供了一系列的表单验证操作
+        在 angular 应用中使用 form，会关联一个 FormController
+        使用了 ng-model 属性的input 会关联一个 NgModelController
+        这些 controller 提供了一些属性来表示表单验证结果
+        常用的验证属性：
+        $valid    字段内容是合法的
+        $invalid  字段内容是非法的
+        $pristine 表单是干净的，没有被修改过
+        $dirty    表单是脏的，有被修改过
+        $touched  触摸过
+        $untouched 未被触摸过
+        $error    是一个对象，对象中保存了没有通过验证的验证器的名称及对应的错误信息
+
+        如果想要使用这些验证结果，需要给 form，input 添加name属性
+        就相当于给 这些 controller 起名
+
+        form 标签的状态：是form标签内部所有子标签状态的综合
+    -->
+    <form name="form" novalidate>
+        <input type="text" name="username" ng-model="username" required ng-pattern="'[a-zA-Z]{2,5}'" autocomplete="off">
+        <span ng-show="form.username.$dirty && form.username.$valid">√</span>
+        <span ng-show="form.username.$dirty && form.username.$invalid">×</span>
+        <p>
+            表单是脏的：{{form.username.$dirty}}，
+            内容合法的：{{form.username.$valid}}
+        </p>
+        <input type="number" name="age" ng-model="age" required min="0" max="30">
+        <span ng-show="form.age.$dirty && form.age.$error.min">年龄不能小于0</span>
+        <span ng-show="form.age.$dirty && form.age.$error.max">年龄不能大于30</span>
+        <span ng-show="form.age.$dirty && form.age.$error.number">年龄必须为数字</span>
+        <br>
+        <!--
+            ng-disabled:如果表单的内容是非法的 $invalid，表单按钮将被禁用
+        -->
+        <input type="submit" value="提交" ng-disabled="form.$invalid">
+    </form>
+
+</body>
+</html>
+<script>
+angular.module('app',[])
+.controller('ctrl',['$scope',function($scope){
+    console.log($scope);
+}])
+
+
+</script>

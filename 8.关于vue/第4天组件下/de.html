@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    var person = {
+        age: 20
+    }
+    //定义属性
+    let app = new vue ({
+        data:{
+            birthYear:20,
+            message:"111"
+        }
+    })
+    // 定义一个属性
+    // defineProperty(o: Object, p:string, attrs:any)
+  Object.defineProperty(person, 'birthYear',{
+        get:function(){
+            var now = new Date().getFullYear();
+            return now - this.age;
+        },
+        set:function(val){
+            var now = new Date().getFullYear();
+            this.age = now -val
+        }
+    })
+console.log(person.birthYear)
+person.birthYear = 2000;
+console.log(person.age)
+</script>

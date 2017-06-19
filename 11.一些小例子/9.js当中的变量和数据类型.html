@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!--
+        
+    -->
+</body>
+</html>
+<script>
+        // 程序执行在内存当中
+        // 如何保存一个数据 保存在内存当中 在内存当中开辟一块内存空间
+        // 并将10这个数据放入这块内存当中
+        // 同时记录这块内存的地址为字符a
+        // 当需要这块内存的数据时,寻找a字符即可
+        // 我们把可以记录内存地址的这样的字符叫做变量
+        // 声明变量a 并把10这个值赋值给a
+        // 声明变量的关键字就叫var
+    var a = 10;
+    var b = 20;
+    var c = a+b;
+    // 普通的字符c
+    // alert("c");
+    // 变量c
+    // alert(c);
+
+    // alert(d);
+    var d = c*2;
+    // alert(d);
+    // console控制台 log输出打印
+    // 在控制台输出变量d的值
+    console.log(d);
+    //同时输出多个值,每个值用逗号隔开
+    console.log(a,b,c,d);
+    console.log(a+b+c+d,a,b,c,d);
+    //可变的量
+    //对变量d进行重新赋值  赋值为23
+    d =23;
+console.log(d);
+
+var sum = d+c;
+var count = 34;
+var age =18;
+var nianLing = 45;
+//变量的命名规则
+//1.驼峰命名法,从第二个单词起,每个单词的首字母大写
+//      myFirstName
+//2.变量的命名一定要有意义
+//3.不能以数字开头 不能以关键字作为命名,不要以汉子作为命名
+//4.可以用字母,数字,下划线去命名
+
+    </script>   
+
+<script>
+    var test =34;
+    var test2 ="34";
+    var test3 = true;
+    console.log(test,test2,test3);
+    //JS当中的基本数据类型
+    //Number数据类型
+    test = 23 ;
+    test =4.4 ;
+    test =-34 ;
+    //0b作为开头 二进制的数据(0-1)
+    test = 0b1000;
+    //0作为开头,八进制的数据(0-7)
+    test = 017;
+    //0x开头,十六进制的数据(0-9  a-f)
+    test=0x1A;
+    //指数表示法
+    //2*10的-6次方
+    test = 2e-6;
+    //3*10的3次方
+    test = 3e3 ;
+    console.log(typeof test,test);
+
+    //string字符串 标志""  或者 ''
+    test2 = "测试";
+    test2 = '测试';
+    test2 = "dddd 'bbb'";
+    test2 = 'aa"ddd"bbb' ;
+    console.log(typeof test2,test2);
+
+    //boolean 布尔类型 只有两个值true真,false假
+    test3 = true ;
+    console.log(typeof test3,test3);
+    // undefined 未定义类型
+    var test4;
+    console.log(typeof test4,test4)
+
+    // null 空的内容 object对象
+    var test5 = null ;
+    console.log(typeof test5,test5);
+</script>
+<script>
+    // 弱类型
+    var test = 34;
+    test = "3345";
+    test = true;
+</script>

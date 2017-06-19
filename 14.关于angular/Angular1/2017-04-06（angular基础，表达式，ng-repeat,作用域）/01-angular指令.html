@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="JZH">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="angular.js"></script>
+    <title></title>
+    <style>
+       nav{
+           width: 100%;
+           height: 44px;
+           display: flex;
+           justify-content: center;
+       } 
+       span{
+         flex-basis: 33.333333%;
+         height: 44px;
+         line-height: 44px;
+         text-align: center;
+         border: 1px solid lightskyblue;
+       }
+    </style>
+</head>
+<body ng-app="app" ng-controller="ctrl" ng-init="index=1;show=true">
+  <!--
+    ng-click 点击事件,告诉angular 元素被点击后执行的操作  
+
+    ng-show ng-hide 都是通过display来控制元素的显示和隐藏
+    ng-show="true" 显示;ng-show="false" 隐藏
+    ng-hide 与 ng-show 作用相同,使用方式相反
+  -->
+  <nav>
+   <span ng-click="index=1;">HTML5</span>
+   <span ng-click="index=2;">UI</span>
+   <span ng-click="index=3;">BigData</span>    
+  </nav>
+  <main>
+     <h1 ng-show="index == 1">前端开发</h1>
+     <h1 ng-show="index == 2">美工设计</h1>
+     <h1 ng-hide="index != 3">大数据时代</h1>    
+  </main> 
+  <!--
+     ng-if 条件判断,根据表达式的值在DOM中生成或者移除一个元素
+     ng-if="true"  生成一个元素插入DOM中
+     ng-if="false" 将对应的元素从DOM中移除 
+  -->
+  <p ng-if="show">你好 angular!</p>
+  <p ng-if="!show">你好 angular!</p> 
+  <!--
+      ng-if 和 ng-show/ng-hide 的区别
+      ng-if 是删除或者新增节点
+      ng-show ng-hide:通过css样式控制元素的显示和隐藏
+  -->
+<!--
+    ng-submit 指令用于在表单提交后执行指定的函数
+    ng-change 指令用于输入框的值改变时执行的操作,需要搭配ng-model使用
+
+-->
+  <form ng-submit="login()">
+     <input type="text" name="username" ng-model="username"
+     ng-change="myChange()">
+     <input type="submit" value="登录">
+  </form>
+  <p>用户名:{{username}}</p>
+  <p>{{message}}</p>
+  <!--
+     ng-bind 作用等同于{{}} 
+  -->
+  <p ng-bind="message"></p>
+</body>
+<html>
+<script>
+var app = angular.module('app',[])
+.controller('ctrl',['$scope',function($scope){
+    
+ $scope.message = '还没有登录';
+ $scope.login = function(){
+   $scope.message = '已经登录';  
+ } 
+ $scope.myChange = function(){
+    console.log($scope.username); 
+ }
+}]);
+</script>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="author" content="JZH">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script src="angular.js"></script>
+    <title>02-下拉列表</title>
+    <style>
+        
+    </style>
+</head>
+<body ng-app="app" ng-controller="ctrl">
+<!--
+  ng-options 用于使用option来填充select 元素选项
+  ng-options 必须要与 ng-model 配合使用
+
+  label for value in array 
+  label 可以根据需要写
+  value 数组的元素
+  array 数组  
+-->
+ <select ng-model="selectedAge" ng-options="age for age in ages">
+   <option value="">请选择年龄</option>
+   <option value="">{{age}}</option>    
+ </select>
+ <select ng-model="selectedStu" ng-options="stu.name for stu in stus">
+    <option value="">请选择姓名</option>
+    <option value="">{{stu.name}}</option>    
+ </select>   
+ <p>选中的年龄:{{selectedAge}}</p>
+ <p>选中的学生:{{selectedStu}}</p>
+</body>
+<html>
+<script>
+angular.module('app',[])
+.controller('ctrl',['$scope',function($scope){
+   $scope.ages = [22,23,24];
+   $scope.stus = [
+     {name:'tom',age:22},
+     {name:'lily',age:23},
+     {name:'lucy',age:24}  
+   ] 
+}])      
+</script>

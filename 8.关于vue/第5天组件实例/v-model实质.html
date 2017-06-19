@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Vue</title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="author" content="尹学江">
+  <script src="vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- 只是一个简写 -->
+    <input type="text" v-model="message">
+    <br>
+    <!-- 双项绑定的实质 -->
+    <input type="text" :value="message" @input="message=$event.target.value">
+    <span>{{ message + initNum }}  {{initNum}} + {{initNum2}}  + {{initNum3}}= {{initNum+initNum2+initNum3}}</span>
+    <!-- 根据双项数据绑定原理 来实现非input表单 双项绑定效果 -->
+    <com v-model="initNum"></com>
+    <com v-model="initNum2"></com>
+    <com v-model="initNum3"></com>
+  </div>
+</body>
+<!-- 定义模板 -->
+<script type="text/x-template" id="com">
+  <div>
+    <button @click="increase">按钮{{value}}</button>
+  </div>
+</script>
+<script type="text/javascript">
+// 注册一个组件
+Vue.component("com", {
+  template: "#com",
+  // 注意这个value是通过v-model传过来
+  props: ['value'],
+  data: function() {
+    return {
+      message: "hello world",
+      // num:this.value
+    }
+  },
+  methods: {
+    increase() {
+      // this.num++
+      let ran = Math.floor(Math.random() * 10)
+      this.$emit("input", ran)
+    }
+  }
+})
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    message: 'Hello Vue!',
+    initNum: 100,
+    initNum2: 100,
+    initNum3: 100
+  }
+})
+</script>
+
+</html>
